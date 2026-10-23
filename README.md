@@ -2,8 +2,9 @@
 
 Standalone research and development tools for **Pokémon SoulSilver USA**.
 ROM changes are **blocked**, not implemented: no verified clean USA input is available.
-The supplied v3 artifact is now accessible through Drive; its header reports USA
-(`IPGE`), revision 10, despite the European filename. See [inspection notes](docs/v3-inspection.md).
+The original supplied through Drive matches the European English reference, not
+the USA reference. It matches v3's underlying build; `IPGE` is shared by both regions.
+See [baseline comparison](docs/v3-baseline.md).
 The pipeline can be developed and tested without any game files.
 
 No ROM, save, BIOS or game asset is distributed or downloaded by these tools.
