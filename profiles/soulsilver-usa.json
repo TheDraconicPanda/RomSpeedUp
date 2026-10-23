@@ -1,0 +1,9 @@
+{
+  "id": "soulsilver-usa-original",
+  "game_code": "IPGE",
+  "revision": 0,
+  "size": 134217728,
+  "sha1": "f8dc38ea20c17541a43b58c5e6d18c1732c7e582",
+  "reference": "https://github.com/pret/pokeheartgold/blob/6988158691eb6178cff697cda0428045ddcba5fb/README.md",
+  "note": "Known reference only. No user-supplied ROM has been verified in this project yet."
+}
