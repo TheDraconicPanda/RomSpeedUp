@@ -1,8 +1,9 @@
 # SoulSilver selective battle speed patch
 
 Standalone research and development tools for **Pokémon SoulSilver USA**.
-ROM changes are **blocked**, not implemented: no verified USA input is available,
-and the supplied European v3 upload exceeds the cloud tool's 32 MiB transfer limit.
+ROM changes are **blocked**, not implemented: no verified clean USA input is available.
+The supplied v3 artifact is now accessible through Drive; its header reports USA
+(`IPGE`), revision 10, despite the European filename. See [inspection notes](docs/v3-inspection.md).
 The pipeline can be developed and tested without any game files.
 
 No ROM, save, BIOS or game asset is distributed or downloaded by these tools.
@@ -93,8 +94,8 @@ The boot check mutes sound; music needs the separate audio regression test.
 All ten decisions, the proposed timing approach and protected behavior are in
 [the design](docs/design.md). **No global speed toggle implements v4.** The earlier
 60 FPS patch must be audited against the unchanged-animation decisions before it
-can be considered a baseline. The exact v3 behavior cannot be inferred from its
-filename or the player's report alone.
+can be considered a baseline. The exact v3 changes cannot be inferred from its
+filename, patched binary alone or the player's report.
 
 Use feature branches, test each change in isolation, and create a PR with the
 changed byte map and evidence. Do not merge unverified gameplay modifications.

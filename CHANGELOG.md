@@ -11,3 +11,11 @@
 - Added local header/hash reporting and 16 MiB transfer splitting helper.
 - No v3/v4 ROM enhancements implemented. Real-ROM, save, music, timing and Delta
   checks remain blocked; a passing tools suite is not a game release.
+
+## Research update — user-provided v3 access
+
+- Downloaded and structurally inspected the user's private Drive artifact after
+  network publication; ARM9 decompression succeeded.
+- Recorded its IPGE/revision-10 header conflict with the European filename.
+- Observed recognizable intro progression in DeSmuME JIT/software-renderer mode.
+  Battle/text/music/save behavior and automated boot validation remain unverified.

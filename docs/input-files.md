@@ -1,9 +1,10 @@
 # Local input files and transfer limits
 
 The cloud cannot open a Windows `C:\...` path. The supplied v3 `.nds` upload
-was rejected by the executor transfer tool because it exceeds 32 MiB. Its contents
-have **not** been inspected. The Google Drive URL also returned HTTP 403 from the
-network proxy, before file metadata could be read. A filename is not verification.
+was rejected by the executor transfer tool because it exceeds 32 MiB. That attachment route could not be inspected. The Google Drive URL initially
+returned HTTP 403; after the user published the network settings, the full file
+was downloaded privately and structurally inspected. See [v3 inspection](v3-inspection.md).
+The helper below remains a fallback when Drive access is unavailable.
 
 Run this standard-library helper on your own computer after cloning the project:
 
@@ -25,7 +26,7 @@ data: never push them, post them publicly or add them to a release. Reassembly
 must preserve part order and verify each part digest plus the full ROM SHA256
 before inspection. Do not use these parts as a clean source build.
 
-The v3 artifact is European and already patched. Reproducing its exact byte delta
+The v3 artifact is already patched and labeled European, but declares USA in its header. Reproducing its exact byte delta
 also needs the matching clean European source identity or the original patch
 source. A US port requires the user's clean USA dump matching the bundled profile.
 Only use files the user supplies; no commercial ROM acquisition links are included.

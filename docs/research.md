@@ -1,7 +1,9 @@
 # Research ledger — 2026-10-23
 
-Only documentation and source repositories were retrieved. No ROMs, BIOS dumps,
-Nintendo SDKs or save files were downloaded. External source trees live outside
+Initial research retrieved documentation and source repositories only. After
+the user supplied a Drive link and published its network access, the user-provided
+v3 ROM was downloaded privately for inspection. No third-party commercial ROMs,
+BIOS dumps, Nintendo SDKs or save files were acquired. External source trees live outside
 this checkout and are not dependencies or distributable project content.
 
 ## Sources inspected
@@ -12,7 +14,7 @@ this checkout and are not dependencies or distributable project content.
 | [BluRosie/hg-engine](https://github.com/BluRosie/hg-engine/tree/f4fca05a63dc7c694b72c89f178fb3030ba6f5ad) | `CONFIG.md` documents `FAST_TEXT_PRINTING`; `armips/asm/user_config.s` has conditional ARM9 edits | README grants hobby/noncommercial reuse, requires freely accessible derivatives and replicated credits; not a permissive general-purpose license. No root LICENSE found. No code incorporated. | Targets English **HeartGold**, is a mechanics overhaul, and calls text “borderline instant.” Direct application violates the no-mechanics-change requirement. Its text edits are global and not proof of manual battle-message advancement or SS compatibility. |
 | [DS-Homebrew/nds-bootstrap](https://github.com/DS-Homebrew/nds-bootstrap/tree/ce62a1c1b2a35ad01834419de0ae655a7f01e6a7) | Retail card header comments identify `IPGE` as SoulSilver with infrared | Root GPL-3.0 text; per-file notices still apply. No implementation copied. | Loader/compatibility reference, not an audited selective speed patch. Runtime cheat writes and ROM file edits are different operations. |
 | [DeSmuME](https://desmume.org/) / Debian trixie package | Installed CLI version 0.9.13-4; CLI `--help` and Xvfb capture verified | Debian package copyright includes GPL-2+ for emulator and component notices; installed outside repo, not vendored | Desktop test backend; not equivalent to Delta. Uses HLE defaults. Actual commercial-game boot and anti-piracy behavior remain untested. |
-| Player's European v1/v2/v3 history | v1 60 FPS worked; v2 instant text white-screened; v3 instant text worked (player report) | Author/source and patch redistribution rights not yet established | No patch/source or byte diff is available in cloud. The Windows path names a **patched** European ROM, not a clean USA baseline. Cannot independently reproduce or verify the changes from a filename. |
+| Player's European v1/v2/v3 history | v1 60 FPS worked; v2 instant text white-screened; v3 instant text worked (player report) | Author/source and patch redistribution rights not yet established | The user-provided patched binary is now available privately; its header declares USA despite its European filename. Patch source and an original-to-v3 byte diff remain unavailable. It is not a clean USA baseline; see v3-inspection.md. |
 
 ## Concrete findings
 
@@ -35,7 +37,7 @@ This is a bounded finding, not proof none exists.
 
 1. Dump a legally owned USA cartridge and run the profile verifier. The project's
    reference hash identifies one original revision, not all US releases or hacks.
-2. Bring v3 source or a patch plus original European ROM identity into the cloud.
+2. Bring v3 source or a patch plus the matching original ROM identity into the cloud.
    Prefer a minimal patch/source over uploading a full patched ROM. A Windows
    `C:\...` path is not mounted in this Linux environment.
 3. Use original/v3 comparison to classify changed header, ARM9, overlays and NARC

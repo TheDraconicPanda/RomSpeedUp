@@ -6,7 +6,8 @@
 - ARM/Thumb tools installed; ARM decoder synthetic instruction test passed.
 - DeSmuME CLI 0.9.13 and Xvfb screenshot capture available on this machine.
 - Real US ROM structure/hash verification: BLOCKED, no input ROM.
-- Real ROM boot, v3 reproduction, timing/audio/Delta/save tests: NOT RUN.
+- User-provided v3 structural inspection and exploratory emulator startup: see `v3-inspection.md`; no passing gameplay/boot claim.
+- Clean USA boot, exact v3 reproduction, timing/audio/Delta/save tests: BLOCKED.
 - No gameplay patch is implemented or released. See `features/status.json`.
 
 ## Pipeline checks required for every PR
