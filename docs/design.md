@@ -1,5 +1,10 @@
 # Patch architecture and v4 investigation
 
+Current user clarification: the **supplied European v3 is the baseline** for all
+unchanged behavior. Its existing frame-rate and text edits are retained. US and
+clean European originals are optional research inputs, not required v4 bases.
+See [current experimental implementation](v4-experimental.md).
+
 ## Ten fixed decisions
 
 | Component | Required behavior | Validation |
@@ -15,10 +20,9 @@
 | Switching | Unchanged | Recall, selection, send-out timings and sequence |
 | End-of-battle transition | Faster, still visible | Compare victory, flee, capture and blackout transitions separately |
 
-“Current speed” for v4 must be measured on the reproduced US v3-equivalent
-baseline. Keep clean-US and v3-equivalent recordings separately. The historical
-60 FPS modification must first be audited for effects on unchanged categories;
-if it conflicts with them, document the conflict rather than enabling it globally.
+“Current speed” and “unchanged” are measured against the actual supplied v3.
+The historical 60 FPS edit is retained byte-for-byte; no additional global
+acceleration is allowed. Original-game timings are not the unchanged baseline.
 No music, save layout, calculations, encounters, Pokémon data or progression
 changes are permitted. Do not run global frame, VBlank, audio, RNG or script
 scheduler acceleration to implement a visual effect.

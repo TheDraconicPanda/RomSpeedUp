@@ -29,3 +29,19 @@
   and fast-text implementation patterns.
 - Recorded exact-recompression limitations. Kept the USA target and its input
   verifier unchanged; no v4 patch or gameplay validation was claimed.
+
+## Partial v4 experiment — European v3 baseline
+
+- Applied the user's clarification: unchanged means v3, not the original game.
+  Retained the exact existing v3 frame-rate/text edits; USA is not a prerequisite.
+- Added guarded compressed-overlay edits for faint visual motion (8 → 12 pixels),
+  ordinary transition interpolation and battle-end palette wait. Preserved RAM,
+  BSS, file layout, ARM9/ARM7 and every unselected asset.
+- Validated three isolated candidates and their combination in one repeatable
+  Zubat battle using a disposable user-save copy; attack, HP/EXP and cry-wait
+  traces stayed at their stated v3 baselines. Fresh title captures matched.
+- Added actual-instruction checks, optional hash-locked emulator tools and private
+  replay/boot comparison scripts. 44 synthetic tests and 24 instruction cases pass.
+- Attack 1.5x, special wild transitions and broad/audio/save-write/Delta regression
+  remain outstanding. Outputs are partial experiments, not a completed release.
+- No ROM/save/screenshots committed; no Drive upload performed.

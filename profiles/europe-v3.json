@@ -1,0 +1,10 @@
+{
+  "id": "user-supplied-soulsilver-europe-v3",
+  "game_code": "IPGE",
+  "revision": 10,
+  "size": 134217728,
+  "sha1": "a6a16924b84ea7b3b262297663b5891bbb55efdd",
+  "sha256": "ee605e633c6fda51b36fdd396a1c4573dbab40dd020ede1d06a4afea2efc30cb",
+  "reference": "User-supplied v3 artifact; not a clean commercial-ROM profile",
+  "baseline": "All unchanged requirements are relative to this v3, per user clarification"
+}
