@@ -28,11 +28,11 @@ section overlap, FAT and overlay-table checks. ndspy parsed the ROM and
 successfully decompressed ARM9. These checks establish structural consistency,
 not that any specific patch or region attribution is correct.
 
-The European filename conflicts with the declared USA header. The file could
-have a modified header or a mislabeled origin; neither explanation is established.
-Do not identify its clean source solely from that header or filename. Its hash
-is different from the original USA profile, and revision 10 is outside that
-profile. It is correctly ineligible as a clean source for US patch builds.
+The initial interpretation of `IPGE` and the emulator's USA serial as conclusive
+region evidence was incorrect: `IPGE` is shared by the European English and
+USA/Australia releases. The later supplied original matches the European metadata
+hash exactly. See [the baseline comparison](v3-baseline.md). The patched file
+is still ineligible as a clean source for US builds.
 
 ## Exploratory emulator startup
 
@@ -64,7 +64,9 @@ do not mix their wall-clock timings as animation performance evidence.
 ## Remaining blockers
 
 The binary alone does not reveal its exact edits relative to the clean source.
-The matching original ROM identity and v3 patch source/diff are still needed to
-reproduce it reliably. A separate clean user-supplied USA dump matching the known
+The matching European original is now available, and the six changed
+decompressed ARM9 ranges are documented in v3-baseline.md. Exact ROM regeneration
+from those edits still needs validated recompression; the initial recompressor
+output differed from the supplied compressed stream. A separate clean user-supplied USA dump matching the known
 profile remains required for the intended US build workflow. No 60 FPS or
 instant-text behavior has been independently validated from this artifact yet.

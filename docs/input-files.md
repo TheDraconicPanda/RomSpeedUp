@@ -26,7 +26,8 @@ data: never push them, post them publicly or add them to a release. Reassembly
 must preserve part order and verify each part digest plus the full ROM SHA256
 before inspection. Do not use these parts as a clean source build.
 
-The v3 artifact is already patched and labeled European, but declares USA in its header. Reproducing its exact byte delta
-also needs the matching clean European source identity or the original patch
-source. A US port requires the user's clean USA dump matching the bundled profile.
+The v3 artifact is already patched; comparison to the subsequently supplied
+original establishes its European English baseline. The shared `IPGE` code alone
+does not distinguish Europe from USA. Its byte delta can now be inspected using the supplied matching European
+original; validated recompression remains separate from identifying the edits. A US port requires the user's clean USA dump matching the bundled profile.
 Only use files the user supplies; no commercial ROM acquisition links are included.

@@ -22,7 +22,7 @@
       "id": "battle-text",
       "decision": "instant, manual advancement",
       "status": "blocked",
-      "blocker": "Clean USA ROM and original v3 patch/source required; patched artifact alone cannot establish the exact text edits or manual-advance behavior"
+      "blocker": "Clean USA target required; European v3 text edits mapped but manual-advance and scope tests remain unverified"
     },
     {
       "id": "hp",
@@ -58,13 +58,19 @@
       "blocker": "USA ROM, traced exit fade and baseline frame counts required"
     }
   ],
-  "v3_reproduction": "blocked: patched v3 artifact inspected (IPGE revision 10); matching clean source and original patch/source unavailable; clean USA target unavailable",
+  "v3_reproduction": "matching European original identified; 17 changed decompressed ARM9 bytes in six ranges mapped; exact compressed-ROM regeneration and behavior tests unverified",
   "global_60fps": "not enabled: historical baseline to investigate, not a selective v4 implementation",
   "save_compatibility": "blocked: no backed-up European save and USA ROM provided",
   "v3_artifact": {
     "sha256": "ee605e633c6fda51b36fdd396a1c4573dbab40dd020ede1d06a4afea2efc30cb",
     "header_game_code": "IPGE",
     "header_revision": 10,
-    "region_warning": "European filename conflicts with declared USA header; actual provenance unverified"
+    "region_warning": "IPGE is shared by Europe/USA; supplied matching clean original is identified as European English by reference SHA1"
+  },
+  "original_artifact": {
+    "sha1": "27a25c23aa1c0ecabe48a30a004b96c9dbc97730",
+    "sha256": "94ad298c32bbcc623d042ca20f46cfcaa399a8e814260cc5645dfe5f4c167c17",
+    "reference_region": "Europe",
+    "usa_target_verified": false
   }
 }

@@ -19,3 +19,13 @@
 - Recorded its IPGE/revision-10 header conflict with the European filename.
 - Observed recognizable intro progression in DeSmuME JIT/software-renderer mode.
   Battle/text/music/save behavior and automated boot validation remain unverified.
+
+## Research update — matched original
+
+- Identified the supplied original as the European English reference by SHA1;
+  corrected the earlier assumption that IPGE uniquely identified the USA release.
+- Compared the matching pair: only stored ARM9 differs; after decompression the
+  differences reduce to 17 bytes across six ranges matching global uncapped-rate
+  and fast-text implementation patterns.
+- Recorded exact-recompression limitations. Kept the USA target and its input
+  verifier unchanged; no v4 patch or gameplay validation was claimed.
