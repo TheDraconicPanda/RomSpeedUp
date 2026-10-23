@@ -1,0 +1,19 @@
+# Private ROMs, saves, extracted assets and all generated reports stay local.
+*.nds
+*.srl
+*.gba
+*.sav
+*.dsv
+*.dst
+*.state
+*.bios
+*.bin
+*.bps
+private/
+build/
+dist/
+artifacts/
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/

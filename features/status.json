@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "release_ready": false,
+  "features": [
+    {"id":"wild-transition", "decision":"faster, visible", "status":"blocked", "blocker":"USA ROM, traced transition-specific timer and baseline frame counts required"},
+    {"id":"trainer-intro", "decision":"unchanged", "status":"regression-testing-blocked"},
+    {"id":"entrance", "decision":"unchanged", "status":"regression-testing-blocked"},
+    {"id":"battle-text", "decision":"instant, manual advancement", "status":"blocked", "blocker":"v3 artifact/source and USA ROM required; text printing and wait-for-input paths must be traced independently"},
+    {"id":"hp", "decision":"unchanged", "status":"regression-testing-blocked"},
+    {"id":"exp", "decision":"unchanged", "status":"regression-testing-blocked"},
+    {"id":"attack", "decision":"approximately 1.5x", "status":"blocked", "blocker":"USA ROM and scoped visual update path required; shared scheduler cannot be globally accelerated"},
+    {"id":"faint", "decision":"approximately 1.5x", "status":"blocked", "blocker":"USA ROM and isolated faint visual callback required"},
+    {"id":"switch", "decision":"unchanged", "status":"regression-testing-blocked"},
+    {"id":"battle-exit", "decision":"faster, visible", "status":"blocked", "blocker":"USA ROM, traced exit fade and baseline frame counts required"}
+  ],
+  "v3_reproduction":"blocked: European v3 patch/source and original ROM identification not provided",
+  "global_60fps":"not enabled: historical baseline to investigate, not a selective v4 implementation",
+  "save_compatibility":"blocked: no backed-up European save and USA ROM provided"
+}

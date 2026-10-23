@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "romspeedup"
+version = "0.1.0"
+description = "Guarded, local-only SoulSilver USA patch research pipeline"
+requires-python = ">=3.11"
+dependencies = ["capstone==5.0.6", "ndspy==4.2.0", "Pillow==11.3.0"]
+
+[project.scripts]
+romspeedup = "romspeedup.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["romspeedup*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
