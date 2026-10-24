@@ -1,0 +1,4 @@
+# Optional frame-stepped emulator/instruction tests; no ROMs included.
+py-desmume==0.0.9
+unicorn==2.1.4
+Pillow==11.3.0

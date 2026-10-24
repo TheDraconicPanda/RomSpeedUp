@@ -5,62 +5,72 @@
     {
       "id": "wild-transition",
       "decision": "faster, visible",
-      "status": "blocked",
-      "blocker": "USA ROM, traced transition-specific timer and baseline frame counts required"
+      "status": "ordinary-types-experimental",
+      "blocker": "Ordinary types 0-5 implemented; special wild intros remain unmodified; day/night/environment coverage incomplete",
+      "baseline": "v3"
     },
     {
       "id": "trainer-intro",
       "decision": "unchanged",
-      "status": "regression-testing-blocked"
+      "status": "retained-from-v3-regression-incomplete",
+      "baseline": "v3"
     },
     {
       "id": "entrance",
       "decision": "unchanged",
-      "status": "regression-testing-blocked"
+      "status": "retained-from-v3-regression-incomplete",
+      "baseline": "v3"
     },
     {
       "id": "battle-text",
       "decision": "instant, manual advancement",
-      "status": "blocked",
-      "blocker": "Clean USA target required; European v3 text edits mapped but manual-advance and scope tests remain unverified"
+      "status": "retained-from-v3",
+      "blocker": "ARM9 byte-identical; no new text modification. Full message/prompt regression remains unrun",
+      "baseline": "v3"
     },
     {
       "id": "hp",
       "decision": "unchanged",
-      "status": "regression-testing-blocked"
+      "status": "retained-from-v3-regression-incomplete",
+      "baseline": "v3"
     },
     {
       "id": "exp",
       "decision": "unchanged",
-      "status": "regression-testing-blocked"
+      "status": "retained-from-v3-regression-incomplete",
+      "baseline": "v3"
     },
     {
       "id": "attack",
       "decision": "approximately 1.5x",
-      "status": "blocked",
-      "blocker": "USA ROM and scoped visual update path required; shared scheduler cannot be globally accelerated"
+      "status": "blocked-scoped-scheduler-needed",
+      "blocker": "Move script and visual tasks use separate updates; no audited selective 3/2 scheduler exists; global acceleration and script-only shortcuts rejected",
+      "baseline": "v3"
     },
     {
       "id": "faint",
       "decision": "approximately 1.5x",
-      "status": "blocked",
-      "blocker": "USA ROM and isolated faint visual callback required"
+      "status": "experimental-tested-motion",
+      "blocker": "Visual steps 8 to 12; whole sequence includes unchanged cry wait and is not 1.5x end-to-end",
+      "baseline": "v3"
     },
     {
       "id": "switch",
       "decision": "unchanged",
-      "status": "regression-testing-blocked"
+      "status": "retained-from-v3-regression-incomplete",
+      "baseline": "v3"
     },
     {
       "id": "battle-exit",
       "decision": "faster, visible",
-      "status": "blocked",
-      "blocker": "USA ROM, traced exit fade and baseline frame counts required"
+      "status": "experimental-tested-palette",
+      "blocker": "Battle palette fade shortened; overworld restore fade and blackout/special paths unchanged",
+      "baseline": "v3"
     }
   ],
   "v3_reproduction": "matching European original identified; 17 changed decompressed ARM9 bytes in six ranges mapped; exact compressed-ROM regeneration and behavior tests unverified",
-  "global_60fps": "not enabled: historical baseline to investigate, not a selective v4 implementation",
-  "save_compatibility": "blocked: no backed-up European save and USA ROM provided",
+  "global_60fps": "Existing v3 edit retained byte-for-byte. No further global acceleration.",
+  "save_compatibility": "User battery save imported on a disposable copy for battle replay; source unchanged. Full save/write/reload and cross-region migration not run.",
   "v3_artifact": {
     "sha256": "ee605e633c6fda51b36fdd396a1c4573dbab40dd020ede1d06a4afea2efc30cb",
     "header_game_code": "IPGE",
@@ -72,5 +82,6 @@
     "sha256": "94ad298c32bbcc623d042ca20f46cfcaa399a8e814260cc5645dfe5f4c167c17",
     "reference_region": "Europe",
     "usa_target_verified": false
-  }
+  },
+  "baseline": "European v3, as explicitly confirmed by user; all unchanged requirements are relative to v3"
 }

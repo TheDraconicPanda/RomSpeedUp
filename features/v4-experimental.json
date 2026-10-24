@@ -1,0 +1,93 @@
+{
+  "status": "experimental-partial-not-v4-release",
+  "baseline": "user-supplied European v3; unchanged means v3",
+  "source_sha256": "ee605e633c6fda51b36fdd396a1c4573dbab40dd020ede1d06a4afea2efc30cb",
+  "overlay_sha256": {
+    "12": "5e17f171743c7651fc57862406d781453114ca91bd44db53685b550403dac710",
+    "120": "15f703e0eb91237440186ad7df3f40cd1e90805fb5acf4b9e48a50943b2dbc34"
+  },
+  "features": [
+    "faint-motion",
+    "battle-exit-palette",
+    "ordinary-wild-transition"
+  ],
+  "pending": [
+    "attack-timing",
+    "special-wild-transition-types",
+    "full-audio-and-Delta-regression"
+  ],
+  "edits": [
+    {
+      "feature": "faint-motion",
+      "overlay": 12,
+      "ram_address": 36045484,
+      "before": "083d",
+      "after": "0c3d",
+      "rationale": "Faint-only shadow-collapse step: 8 to 12; retain zero clamp"
+    },
+    {
+      "feature": "faint-motion",
+      "overlay": 12,
+      "ram_address": 36045596,
+      "before": "0832",
+      "after": "0c32",
+      "rationale": "Faint-only sprite Y displacement: 8 to 12"
+    },
+    {
+      "feature": "faint-motion",
+      "overlay": 12,
+      "ram_address": 36045612,
+      "before": "083d",
+      "after": "0c3d",
+      "rationale": "Faint-only crop-height decrement: 8 to 12; retain zero clamp"
+    },
+    {
+      "feature": "battle-exit-palette",
+      "overlay": 12,
+      "ram_address": 36045762,
+      "before": "0123",
+      "after": "0023",
+      "rationale": "Battle-end palette wait: 1 to 0. Keep music fade and sprite fade calls unchanged"
+    },
+    {
+      "feature": "ordinary-wild-transition",
+      "overlay": 120,
+      "ram_address": 36043596,
+      "before": "0422",
+      "after": "0222",
+      "rationale": "Ordinary transition IDs 0/1 tile interpolation duration 4 to 2; group order unchanged"
+    },
+    {
+      "feature": "ordinary-wild-transition",
+      "overlay": 120,
+      "ram_address": 36043932,
+      "before": "0422",
+      "after": "0222",
+      "rationale": "Ordinary transition IDs 4/5 tile interpolation duration 4 to 2; group order unchanged"
+    },
+    {
+      "feature": "ordinary-wild-transition",
+      "overlay": 120,
+      "ram_address": 36044772,
+      "before": "1220",
+      "after": "0c20",
+      "rationale": "Ordinary transition IDs 2/3 first background interpolation 18 to 12 frames"
+    },
+    {
+      "feature": "ordinary-wild-transition",
+      "overlay": 120,
+      "ram_address": 36044792,
+      "before": "1e20",
+      "after": "1420",
+      "rationale": "Ordinary transition IDs 2/3 second background interpolation 30 to 20 frames"
+    },
+    {
+      "feature": "ordinary-wild-transition",
+      "overlay": 120,
+      "ram_address": 36044822,
+      "before": "0f23",
+      "after": "0a23",
+      "rationale": "Ordinary transition IDs 2/3 blend interpolation 15 to 10 frames"
+    }
+  ]
+}

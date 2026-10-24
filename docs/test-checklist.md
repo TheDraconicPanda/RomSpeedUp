@@ -2,13 +2,18 @@
 
 ## Current evidence
 
-- Pipeline unit/integration tests: synthetic fixtures only; see actual pytest output.
-- ARM/Thumb tools installed; ARM decoder synthetic instruction test passed.
-- DeSmuME CLI 0.9.13 and Xvfb screenshot capture available on this machine.
-- Real US ROM structure/hash verification: BLOCKED, no input ROM.
-- User-provided v3 structural inspection and exploratory emulator startup: see `v3-inspection.md`; no passing gameplay/boot claim.
-- Clean USA boot, exact v3 reproduction, timing/audio/Delta/save tests: BLOCKED.
-- No gameplay patch is implemented or released. See `features/status.json`.
+See [the experimental report](v4-experimental.md) for actual measurements.
+
+- 44 synthetic pipeline tests passed locally.
+- 24 actual-instruction faint-motion cases passed (graphics APIs stubbed).
+- Fresh candidate title-screen capture matched v3 exactly, pixel error 0.
+- One controlled ordinary wild battle completed on v3, three isolated candidates
+  and their combination. Loaded edited instructions were verified in RAM.
+- Move-animation, HP-bar and EXP-bar callback sequences/spans matched v3 in that
+  scenario. Faint motion, ordinary transition and exit palette wait shortened.
+- ROM/container/assets/source-input integrity checks passed; source save unchanged.
+- Attack 1.5x is NOT IMPLEMENTED. Special wild types, broad trainer/switch/audio,
+  save-write/reload and Delta checks remain unrun. The project is not complete.
 
 ## Pipeline checks required for every PR
 

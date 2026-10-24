@@ -1,0 +1,20 @@
+{
+  "description": "Replay from a private v3 overworld checkpoint made from the user's save. Ordinary cave encounter, Ember, wild faint, EXP and exit. Checkpoint and ROM/save bytes are never committed.",
+  "actions": [
+    {"frames":32,"keys":["UP"]},
+    {"frames":32,"keys":["DOWN"]},
+    {"frames":32,"keys":["UP"]},
+    {"frames":32,"keys":["DOWN"]},
+    {"frames":200,"shot":"encounter"},
+    {"frames":2,"keys":["A"]},
+    {"frames":150,"shot":"commands"},
+    {"frames":2,"keys":["A"]},
+    {"frames":150},
+    {"frames":2,"keys":["A"]},
+    {"frames":240,"shot":"moves"},
+    {"frames":6,"keys":["A"]},
+    {"frames":360,"shot":"experience"},
+    {"frames":6,"keys":["A"]},
+    {"frames":180,"shot":"return"}
+  ]
+}
