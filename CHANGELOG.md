@@ -1,5 +1,15 @@
 # Changelog
 
+## Experimental manual result messages — 2026-10-24
+
+- Added fresh-A/B manual waits for selected miss and immunity messages while
+  retaining instant printing, ordinary timed waits and link-battle fallback.
+- Guarded exact European partial-candidate identity, handler slot, command table,
+  scripts, compression and protected files. No code/data relocation.
+- 1400 actual-instruction timed-wait comparisons, 1200 manual-wait updates,
+  28 script paths and fresh title-screen comparisons passed. Full gameplay/Delta
+  checks remain for the player; attack acceleration remains unimplemented.
+
 ## 0.1.0 — development scaffold (2026-10-23)
 
 - Added strict USA source identification and NDS structural checks.
