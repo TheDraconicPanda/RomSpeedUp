@@ -3,6 +3,17 @@
 Updated 2026-10-24. This is project context and reproducible guidance; check the
 current checkout, inputs and tools before acting on historical observations.
 
+## Follow-up: manual miss/immunity results
+
+The player reports the delivered partial build works and other attempted
+checklist items were good; fainting remains untested. Miss and immunity result
+messages disappeared too quickly. They chose a fresh A/B press with unlimited
+reading time. `feature/manual-result-text` implements this incremental change on
+the exact partial candidate; see `docs/manual-result-text.md` for build commands,
+guards, scope and actual-instruction/script/boot evidence. It remains partial V4;
+attack acceleration is still unimplemented. Do not confuse a result-message fix
+with full manual advancement for every battle message or finished V4.
+
 ## Start here
 
 Repository: `TheDraconicPanda/RomSpeedUp`.
