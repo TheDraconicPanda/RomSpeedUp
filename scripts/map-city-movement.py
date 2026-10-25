@@ -119,10 +119,9 @@ class Machine:
         assert tick==duration
         assert self.read(OBJECT+0xa8)==2
         assert sum(abs(v) for v in positions[-1])==16*4096
-        assert velocity*duration==16*4096
         return dict(command=command,direction=direction,advancing_updates=tick,
                     fixed_point_delta_per_update=velocity,animation=animation,
-                    final_vector=list(positions[-1]))
+                    final_vector=list(positions[-1]),positions=[list(p) for p in positions])
 
 
 def main():

@@ -91,5 +91,15 @@
     "target_sha256": "4872087cab43c11df33507aaef88186208a4a2c1ac9bab9abfe66835fbe16e7b",
     "details": "docs/v5-experimental.md",
     "Delta_validated": false
+  },
+  "v5.1": {
+    "status": "experimental",
+    "city_movement": "1.5x nominal spatial delta; six/three advances per tile, 4/3x average advancing speed",
+    "city_animation": "1.5x eligible walk/run sprite increment; later poses verified in synthetic-city live cave replay",
+    "result_text": "byte-identical to V5",
+    "surf": "unchanged; reported slow area still unidentified",
+    "target_sha256": "c8efa1170ca2969f43899e2373bb78f884414745c26c807e6ec3c32e0ce7b7a4",
+    "details": "docs/v5-1-movement.md",
+    "Delta_validated": false
   }
 }

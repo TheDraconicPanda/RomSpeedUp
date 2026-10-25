@@ -5,6 +5,22 @@ current checkout, inputs and tools before acting on historical observations.
 
 ## v5 follow-up — 2026-10-25
 
+### V5.1 correction — 2026-10-25
+
+User reports V5 cities too fast and a frozen/sliding player, requests lowering
+the 2x boost by 0.5. Branch `feature/v5-1-movement`; see
+`docs/v5-1-movement.md`. New private candidate `build/v5-1-002`, SHA256
+`c8efa1170ca2969f43899e2373bb78f884414745c26c807e6ec3c32e0ce7b7a4`.
+Build from exact delivered V5 with `scripts/build-v51.py`. Spatial delta and
+eligible walk/run animation clock use 1.5x; whole tile/frame rounding yields
+six/three advances and a 4/3x average across advancing callbacks. Do not claim
+exact 1.5x real-time speed. Sprite dispatcher, movement, mid-tile changes and
+retained text checks pass. Live cave replay with a synthetic city type reproduces
+the V5 pose problem and shows later poses in V5.1. This is not actual Delta/city
+geometry validation. Surf stays unchanged: user reports some slow areas but has
+not identified one yet. Ask for one example before choosing surfing scope.
+V5 battle text is preserved exactly. Prior V5.1-001 is superseded.
+
 The player authorized implementation, named v5: estimated 2x city movement and
 fast visible (not instant) miss/immunity results with automatic advancement.
 Branch `feature/v5-city-and-text`; see `docs/v5-experimental.md`, `scripts/build-v5.py`
