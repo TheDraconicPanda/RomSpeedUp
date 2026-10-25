@@ -3,6 +3,18 @@
 Updated 2026-10-24. This is project context and reproducible guidance; check the
 current checkout, inputs and tools before acting on historical observations.
 
+## Follow-up: city movement mapping only — 2026-10-25
+
+Player reports slower city movement in Delta (Goldenrod/Ecruteak), also present
+in V3; audio comparison unavailable. They authorized mapping first and deferred
+implementation. `research/city-movement-map` adds read-only instruction research;
+see `docs/city-movement-map.md` and `scripts/map-city-movement.py`. Actual European
+code uses the same ordinary per-update walk/run speeds in cities and routes
+(8/4 advancing callbacks per tile). City detection and a player decision boundary
+are mapped, so a scoped compensating change has research targets. Real-time parity,
+the Delta cadence ratio and safe helper-code allocation are not established.
+No movement patch or new ROM was built; await the user's implementation decision.
+
 ## Follow-up: manual miss/immunity results
 
 The player reports the delivered partial build works and other attempted
