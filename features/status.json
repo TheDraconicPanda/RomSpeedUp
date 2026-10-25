@@ -24,8 +24,8 @@
     {
       "id": "battle-text",
       "decision": "instant, manual advancement",
-      "status": "retained-from-v3",
-      "blocker": "ARM9 byte-identical; no new text modification. Full message/prompt regression remains unrun",
+      "status": "v5-selected-results-progressive-and-automatic",
+      "blocker": "Selected miss/immunity results print visibly and use an automatic 24-update pause; other messages retain V3 behavior. Live glyph/Delta checks remain pending.",
       "baseline": "v3"
     },
     {
@@ -83,5 +83,13 @@
     "reference_region": "Europe",
     "usa_target_verified": false
   },
-  "baseline": "European v3, as explicitly confirmed by user; all unchanged requirements are relative to v3"
+  "baseline": "European v3, as explicitly confirmed by user; all unchanged requirements are relative to v3",
+  "v5": {
+    "status": "experimental",
+    "city_movement": "estimated 2x ordinary player walking/running on city/town outdoor maps; route/interior/NPC/script exclusions tested with stubs",
+    "result_text": "one glyph per printer-task invocation, then automatic WaitTime 24 for seven selected miss/immunity results",
+    "target_sha256": "4872087cab43c11df33507aaef88186208a4a2c1ac9bab9abfe66835fbe16e7b",
+    "details": "docs/v5-experimental.md",
+    "Delta_validated": false
+  }
 }

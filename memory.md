@@ -3,6 +3,19 @@
 Updated 2026-10-24. This is project context and reproducible guidance; check the
 current checkout, inputs and tools before acting on historical observations.
 
+## v5 follow-up — 2026-10-25
+
+The player authorized implementation, named v5: estimated 2x city movement and
+fast visible (not instant) miss/immunity results with automatic advancement.
+Branch `feature/v5-city-and-text`; see `docs/v5-experimental.md`, `scripts/build-v5.py`
+and `scripts/validate-v5.py`. Corrected private candidate is `build/v5-002`, SHA256
+`4872087cab43c11df33507aaef88186208a4a2c1ac9bab9abfe66835fbe16e7b`.
+The early `v5-001` candidate failed instruction checks and must not be delivered.
+Normal movement state code is compacted within its original slot; no field overlay
+expansion. Selected results print one glyph/task invocation plus WaitTime 24;
+manual-only result behavior is superseded. Delta/city/follower/camera gameplay
+testing remains pending; attack acceleration remains unimplemented.
+
 ## Follow-up: city movement mapping only — 2026-10-25
 
 Player reports slower city movement in Delta (Goldenrod/Ecruteak), also present
