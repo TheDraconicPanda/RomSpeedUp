@@ -16,10 +16,12 @@ from .rom import inspect, crc16
 BASE = 0x02000000
 
 
-def assemble(name, address):
+def assemble(name, address, defines=None):
     path = Path(__file__).resolve().parents[1]/'features'/(name+'.s')
     source = '\n'.join(line for line in path.read_text().splitlines()
                        if not line.startswith('//'))
+    for key, value in (defines or {}).items():
+        source = source.replace(key, hex(value))
     result=bytes(Ks(KS_ARCH_ARM,KS_MODE_THUMB).asm(source,addr=address)[0])
     literal_bytes=sum('.word' in line for line in source.splitlines())*4
     code=result[:len(result)-literal_bytes] if literal_bytes else result

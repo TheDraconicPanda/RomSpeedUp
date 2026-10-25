@@ -1,5 +1,17 @@
 # Changelog
 
+## V5.1 — experimental city calibration and animation correction (2026-10-25)
+
+- Reduced city spatial deltas from 2x to 1.5x, with shorter final deltas to retain
+  tile endpoints. Frame/tile rounding gives a 4/3x average advancing speed.
+- Matched eligible walk/run animation increments to the boost, correcting the
+  repeated early running pose reproduced in live emulator replay.
+- Added compact shared movement wrappers and guarded sprite hooks without
+  expanding runtime sections. V5 battle results remain byte-identical.
+- Passed movement/sprite/interruption instruction checks, retained battle checks,
+  44 pipeline tests, BPS integrity and fresh title comparison. Actual city/Delta
+  regression remains pending. Location-specific surfing slowness remains unresolved.
+
 ## v5 — experimental city movement and result text (2026-10-25)
 
 - Added the player's estimated 2x city/town outdoor walking/running target with

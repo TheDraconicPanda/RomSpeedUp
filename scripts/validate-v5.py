@@ -27,8 +27,8 @@ CTX,BSYS,PRINTER,MSG,DATA=AVATAR,0x02320000,0x02330000,0x02331000,0x02332000
 class Machine(mapping.Machine):
     def __init__(self,rom):
         super().__init__(bytes(ndspy.codeCompression.decompress(rom.arm9)))
-        ov=ndspy.code.loadOverlayTable(rom.arm9OverlayTable,lambda oid,fid:rom.files[fid],{12})[12]
-        self.cpu.mem_write(ov.ramAddress,bytes(ov.data))
+        for ov in ndspy.code.loadOverlayTable(rom.arm9OverlayTable,lambda oid,fid:rom.files[fid],{1,12}).values():
+            self.cpu.mem_write(ov.ramAddress,bytes(ov.data))
         self.config=(0,True,True)
         self.state_returns={}
         self.trace=[]
@@ -41,7 +41,7 @@ class Machine(mapping.Machine):
         self.emitted=None
         def hook(c,address,size,user):
             result=None
-            if address==0x0203e13c and self.mode=='step':
+            if address==0x0203e13c and self.mode in ('step','sprite'):
                 assert c.reg_read(UC_ARM_REG_R0)==FIELD
                 result=int(self.config[2])
             elif self.mode=='state' and address in self.state_returns:
@@ -156,7 +156,9 @@ def script_flow(words,status=0,btype=0,move_range=0):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('baseline',type=Path);p.add_argument('candidate',type=Path)
-    p.add_argument('--out',required=True,type=Path);a=p.parse_args()
+    p.add_argument('--out',required=True,type=Path)
+    p.add_argument('--movement-revision',choices=['v5','v5.1'],default='v5')
+    a=p.parse_args()
     if a.out.exists():p.error('Fresh output report required')
     source=a.baseline.read_bytes();target=a.candidate.read_bytes()
     oldrom,newrom=map(ndspy.rom.NintendoDSRom,[source,target])
@@ -167,15 +169,27 @@ def main():
         assert old.state(*inputs)==new.state(*inputs),inputs
         count+=1
     step_cases=0
-    commands=list(range(12,16))+list(range(88,92))+[8,16,20,84]
+    commands=(list(range(4,24))+list(range(84,92)) if a.movement_revision=='v5.1'
+              else list(range(12,16))+list(range(88,92))+[8,16,20,84])
     for mid,state,player,allowed,command in itertools.product([39,40,76,78,79,6],range(3),[False,True],[False,True],commands):
         old.config=new.config=(state,player,allowed)
         base=old.step(mid,command);changed=new.step(mid,command)
         accelerated=mid in [76,78,6] and state==0 and player and allowed and command in list(range(12,16))+list(range(88,92))
         assert base['animation']==changed['animation']
         assert base['final_vector']==changed['final_vector']
-        assert base['advancing_updates']==changed['advancing_updates']*(2 if accelerated else 1)
-        assert changed['fixed_point_delta_per_update']==base['fixed_point_delta_per_update']*(2 if accelerated else 1)
+        if a.movement_revision=='v5.1' and accelerated:
+            assert base['advancing_updates']*3==changed['advancing_updates']*4
+            assert changed['fixed_point_delta_per_update']*2==base['fixed_point_delta_per_update']*3
+            previous=(0,0,0)
+            for index,position in enumerate(changed['positions']):
+                distance=sum(abs(a-b) for a,b in zip(position,previous))
+                assert distance==(changed['fixed_point_delta_per_update'] if index<len(changed['positions'])-1
+                                 else 16*4096-changed['fixed_point_delta_per_update']*index)
+                previous=position
+        else:
+            assert base['advancing_updates']==changed['advancing_updates']*(2 if accelerated else 1)
+            assert changed['fixed_point_delta_per_update']==base['fixed_point_delta_per_update']*(2 if accelerated else 1)
+            if not accelerated:assert base==changed
         step_cases+=1
     wait_cases=0
     for frames,counter,btype,special,keys,touch in itertools.product([0,1,2,30,90],[0,1,29,30,0x7fffffff],[0,4],[0,16],[0,1,2,4,0x400,0x800,0x1000],[0,1]):

@@ -1,5 +1,10 @@
 # v5 experimental — city movement and automatic visible result text
 
+**Superseded for city movement by V5.1.** User testing found the speed excessive
+and the player appeared to slide. Preserving the animation selector did not
+preserve its visible cadence after shortening movement. See
+[the correction and actual validation](v5-1-movement.md).
+
 The player requested the name **v5**, an estimated 2x city walking/running boost,
 and fast but noninstant miss/immunity text that advances without user input.
 The multiplier is the player's approximation to the walk/run difference, not a
