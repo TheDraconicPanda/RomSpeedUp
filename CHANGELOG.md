@@ -1,5 +1,17 @@
 # Changelog
 
+## v5 — experimental city movement and result text (2026-10-25)
+
+- Added the player's estimated 2x city/town outdoor walking/running target with
+  original gait animations and tile endpoints; tested route/interior/NPC/script
+  exclusions. No new global acceleration or field-overlay memory expansion.
+- Replaced manual miss/immunity waits with fast visible printing and a short
+  automatic pause. Other text and link fallback paths retain prior behavior.
+- Added guarded ARM9 recompression/Nitro-footer preservation and actual-instruction
+  comparisons. Corrected candidate passed instruction checks, 44 pipeline tests
+  and fresh title-screen comparison. Delta/follower/camera/gameplay checks pending.
+- Selective attack acceleration remains unimplemented.
+
 ## Experimental manual result messages — 2026-10-24
 
 - Added fresh-A/B manual waits for selected miss and immunity messages while
