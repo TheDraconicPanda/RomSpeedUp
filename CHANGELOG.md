@@ -1,5 +1,16 @@
 # Changelog
 
+## V5.2 — experimental city follower correction (2026-10-27)
+
+- Matched active ordinary follower walking/running timing to the V5.1 city player
+  and adjusted moving follower animation clocks. Retained exact tile endpoints.
+- Guarded follower identity, active/movement state, pause flags and city/on-foot
+  control; excluded NPCs and other contexts. Player calibration and battle text
+  remain unchanged.
+- Reproduced V5.1's growing follower gap in a live synthetic-city cave replay;
+  V5.2 maintains close following and returns to one tile after stops and a turn.
+  Native follower/player/text regression, pipeline, BPS and boot checks pass.
+
 ## V5.1 — experimental city calibration and animation correction (2026-10-25)
 
 - Reduced city spatial deltas from 2x to 1.5x, with shorter final deltas to retain

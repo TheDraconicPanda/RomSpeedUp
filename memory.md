@@ -5,6 +5,24 @@ current checkout, inputs and tools before acting on historical observations.
 
 ## v5 follow-up — 2026-10-25
 
+### V5.2 follower correction — 2026-10-27
+
+Player reports V5.1 much better, but Pokémon lags behind in cities. Branch
+`feature/v5-2-follower`; `docs/v5-2-follower.md` describes the scoped correction.
+Build exact V5.1 with `scripts/build-v52.py`, which reuses the guarded V5.1 builder
+with the follower option. Private `build/v5-2-001/candidate.nds` SHA256
+`a5ba152ccfa0a794396e8b3d428822d1226b78676873764f312795ded7bd1539`.
+Follower ordinary walk/fast-walk uses six/three advances, matching the unchanged
+V5.1 player. Identity/active/type/pause/control/map guards and moving-pose clock
+hooks retain other contexts. Native follower and retained regressions pass; live
+synthetic-city cave replays keep a close gap and return to one tile at stops,
+including a turn. Delta and actual city geometry validation remain pending.
+
+Drive confirmed V5.2 ZIP upload on 2026-10-27, file ID
+`1xttJGeUfld7ppcbPYlZnr6vkwubBMaHR`, 61744321 bytes, in the authorized folder.
+<https://drive.google.com/file/d/1xttJGeUfld7ppcbPYlZnr6vkwubBMaHR/view>
+ZIP SHA256 `403fcc30599adf654deac0ba7c82677448fec51e3d15ba4e3d83f055f1fb5d2d`.
+
 ### V5.1 correction — 2026-10-25
 
 User reports V5 cities too fast and a frozen/sliding player, requests lowering
@@ -20,6 +38,15 @@ the V5 pose problem and shows later poses in V5.1. This is not actual Delta/city
 geometry validation. Surf stays unchanged: user reports some slow areas but has
 not identified one yet. Ask for one example before choosing surfing scope.
 V5 battle text is preserved exactly. Prior V5.1-001 is superseded.
+
+Delivery attempt: `build/v5-1-delivery/SoulSilver_Europe_v5_1_EXPERIMENTAL.zip`,
+61744989 bytes, SHA256
+`1d0d1acb6409bfd40735502ca9b737c8c4a9cda7c01cbc170f58224d2a6c5f90`.
+Drive upload to the authorized folder **failed**, HTTP 403
+`storageQuotaExceeded`: "The user's Drive storage quota has been exceeded."
+No new Drive file ID was returned; do not claim V5.1 is saved there. Retain old
+files and retry only after capacity is available. Code is pushed; draft PR #7:
+<https://github.com/TheDraconicPanda/RomSpeedUp/pull/7> against V5.
 
 The player authorized implementation, named v5: estimated 2x city movement and
 fast visible (not instant) miss/immunity results with automatic advancement.
@@ -302,3 +329,12 @@ files. A docs-only handoff does not require rerunning emulator scenarios.
 Report what was implemented, what was actually tested, what remains blocked and
 where the user can obtain the private build. Do not equate a successful upload,
 boot smoke test or automated tests with completing every V4 requirement.
+
+### V5.1 Drive retry succeeded — 2026-10-26
+
+After the player freed storage, Drive confirmed upload and separate metadata
+readback of `SoulSilver_Europe_v5_1_EXPERIMENTAL.zip`, 61744989 bytes, in the
+authorized RomSpeedUp folder. File ID `1vHr8gUtOxbFt0rx5Cl_P1EdQekHnh0s1`.
+<https://drive.google.com/file/d/1vHr8gUtOxbFt0rx5Cl_P1EdQekHnh0s1/view>
+The local ZIP hash still matches the packaged V5.1 build. This supersedes the
+earlier storage-quota delivery failure; no build changes were made for the retry.

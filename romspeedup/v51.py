@@ -41,14 +41,18 @@ pop {{r3, pc}}
 ''', address)
 
 
-def build(source):
-    if digest(source) != SOURCE:
-        raise ValueError('V5.1 requires the exact delivered V5 ROM')
+def build(source, *, follower=False):
+    expected_source = ('c8efa1170ca2969f43899e2373bb78f884414745c26c807e6ec3c32e0ce7b7a4'
+                       if follower else SOURCE)
+    if digest(source) != expected_source:
+        raise ValueError('Requires exact delivered V5.1' if follower else 'V5.1 requires the exact delivered V5 ROM')
     sections = inspect(source)['sections']
     rom = ndspy.rom.NintendoDSRom(source)
     original = bytes(ndspy.codeCompression.decompress(rom.arm9))
     arm = bytearray(original)
-    if digest(arm[START-BASE:END-BASE]) != '7079c0980b925ff6b6c92869064d78b2fd0ce4914b6690795eccc388111a3679':
+    expected_slot = ('0ee101add5422d6d4cd95b76487e7f879274d49a43601711a3aa97a47e403b6c'
+                     if follower else '7079c0980b925ff6b6c92869064d78b2fd0ce4914b6690795eccc388111a3679')
+    if digest(arm[START-BASE:END-BASE]) != expected_slot:
         raise ValueError('Movement wrapper slot guard mismatch')
     # Share identical direction wrappers. Only callback table pointers refer to
     # the relocated entrypoints; verify that invariant before replacing them.
@@ -73,14 +77,17 @@ def build(source):
     for family, animation, power, duration in FAMILIES:
         cursor += len(group(cursor, animation, power, duration, 0x020624cc))
     eligible_at = cursor
-    eligible = assemble('v51-city-eligible', eligible_at)
+    prefix = 'v52' if follower else 'v51'
+    eligible = assemble(prefix+'-city-eligible', eligible_at)
     initializer_at = eligible_at + len(eligible)
     defines = {'ELIGIBLE': eligible_at}
-    initializer = assemble('v51-city-init', initializer_at, defines)
+    initializer = assemble(prefix+'-city-init', initializer_at, defines)
     delta_at = initializer_at + len(initializer)
-    delta = assemble('v51-last-delta', delta_at, defines)
+    delta = assemble(prefix+'-last-delta', delta_at, defines)
     sprite_at = delta_at + len(delta)
     sprite = assemble('v51-sprite-speed', sprite_at, defines)
+    follower_sprite_at = sprite_at + len(sprite)
+    follower_sprite = assemble('v52-follower-sprite',follower_sprite_at,defines) if follower else b''
     code = bytearray()
     new_entries = {}
     for family, animation, power, duration in FAMILIES:
@@ -91,15 +98,15 @@ def build(source):
             new_entries[command] = address + direction*4
             struct.pack_into('<I',arm,row-BASE,new_entries[command]|1)
         code += group(address,animation,power,duration,
-                      initializer_at if family in (12,88) else 0x020624cc)
-    code += eligible + initializer + delta + sprite
+                      initializer_at if family in ((12,16,88) if follower else (12,88)) else 0x020624cc)
+    code += eligible + initializer + delta + sprite + follower_sprite
     if len(code) > END-START:
         raise ValueError('Movement code exceeds original wrapper slot')
     code += bytes.fromhex('c046')*((END-START-len(code))//2)
     arm[START-BASE:END-BASE] = code
     branch = lambda at,target: compile_code(f'bl {target}',at)
     delta_call = 0x02062524
-    if original[delta_call-BASE:delta_call-BASE+4] != branch(delta_call,0x0206101c):
+    if original[delta_call-BASE:delta_call-BASE+4] != branch(delta_call,0x020626c8 if follower else 0x0206101c):
         raise ValueError('Movement delta call guard mismatch')
     arm[delta_call-BASE:delta_call-BASE+4] = branch(delta_call,delta_at)
     ov = ndspy.code.loadOverlayTable(rom.arm9OverlayTable,lambda oid,fid:rom.files[fid],{1})[1]
@@ -107,9 +114,15 @@ def build(source):
     sprite_calls = [0x021f8014,0x021f82ea]
     for call in sprite_calls:
         at = call-ov.ramAddress
-        if old_ov[at:at+4] != branch(call,0x02023f04):
+        if old_ov[at:at+4] != branch(call,0x0206270c if follower else 0x02023f04):
             raise ValueError(f'Sprite advance call guard mismatch: {call:#x}')
         ov.data[at:at+4] = branch(call,sprite_at)
+    follower_calls = [0x021f7a10,0x021f7a4c,0x021f8e2e,0x021f8e60] if follower else []
+    for call in follower_calls:
+        at = call-ov.ramAddress
+        if old_ov[at:at+4] != branch(call,0x02023f04):
+            raise ValueError(f'Follower sprite call guard mismatch: {call:#x}')
+        ov.data[at:at+4] = branch(call,follower_sprite_at)
     # Unselected data, section layouts, footer and neighboring files stay intact.
     settings = ndspy.code.MainCodeFile(rom.arm9,BASE).codeSettingsOffs
     packed = bytearray(ndspy.codeCompression.compress(arm,True))
@@ -161,7 +174,7 @@ def build(source):
     old_main,new_main = (ndspy.code.MainCodeFile(a.arm9,BASE) for a in (rom,check))
     layout = lambda m:[(s.ramAddress,len(s.data),s.bssSize,s.implicit) for s in m.sections]
     if layout(old_main)!=layout(new_main):raise ValueError('ARM9 memory layout changed')
-    report = dict(version='v5.1',status='experimental',release_ready=False,
+    report = dict(version='v5.2' if follower else 'v5.1',status='experimental',release_ready=False,
                   source_sha256=digest(source),target_sha256=digest(target),
                   nominal_city_delta_multiplier=1.5,city_walk_advances=6,city_run_advances=3,
                   tile_average_advance_multiplier=4/3,city_sprite_multiplier=1.5,
@@ -169,4 +182,7 @@ def build(source):
                   eligible_address=eligible_at,initializer_address=initializer_at,
                   delta_address=delta_at,sprite_address=sprite_at,entries=new_entries,
                   arm9_packed_size=len(packed),overlay1_packed_size=len(packed_ov))
+    if follower:
+        report.update(follower_sprite_address=follower_sprite_at,follower_sprite_calls=follower_calls,
+                      follower='Active normal follower matches city player walk/run timing and ordinary animation clock')
     return target,report

@@ -100,6 +100,16 @@
     "surf": "unchanged; reported slow area still unidentified",
     "target_sha256": "c8efa1170ca2969f43899e2373bb78f884414745c26c807e6ec3c32e0ce7b7a4",
     "details": "docs/v5-1-movement.md",
+    "Delta_validated": false,
+    "Delta_feedback": "Player reports much better; city follower falls behind"
+  },
+  "v5.2": {
+    "status": "experimental",
+    "follower": "Registered active normal follower matches V5.1 city player walk/run timing and moving animation clock",
+    "player": "V5.1 calibration retained",
+    "result_text": "byte-identical to V5.1",
+    "target_sha256": "a5ba152ccfa0a794396e8b3d428822d1226b78676873764f312795ded7bd1539",
+    "details": "docs/v5-2-follower.md",
     "Delta_validated": false
   }
 }
