@@ -8,15 +8,15 @@ The user requested a new version, "Pokemon SoulSilver V6", based on the supplied
 
 The user confirmed that long-pressing Fast Forward does **not** offer a 2x choice; they only have the default speed. Do not build a solution requiring them to select Delta 2x.
 
-Their exact iPhone/iPad model and Delta version are still unknown. A concise question asking for these is pending, because the presumed default 3x has not been established for their installation. Current Delta source selects 3x for A15+ and 1.5x for A11–A14 DS emulation, unless overridden; source is not evidence of the user's installed version/settings.
+The user subsequently explicitly confirmed: **default is 3**. Accept this as the calibration multiplier; do not ask them again. Device model/version were not supplied, but are no longer needed to establish the multiplier. The intended next design uses their existing default Fast Forward setting, with ROM gameplay pacing at two-thirds of retail and music at one-third. This has been explained to the user; it is not built or tested.
 
 The managed workspace became unavailable. The last runtime status reported current observations, desired/observed running, but connectivity **offline**. Shell creation failed with an exec-server transport disconnection/recovery timeout. Available runtime tools expose status/diagnostics, not restart. Do not claim additional tests/builds occurred after that outage.
 
-## Possible better approach with the user's existing default
+## Next design: calibrate for the confirmed existing default
 
-If the actual default multiplier S is confirmed as 3, a new original-based ROM could target game timing 2/S (two-thirds of retail) and music tempo 1/S (one-third), then use Delta's existing Fast Forward switch. This would target 2x gameplay and 1x music without a selectable Delta 2x option.
+The confirmed multiplier S is 3. A new original-based ROM can be investigated with game timing 2/S (two-thirds of retail) and music tempo 1/S (one-third), using Delta's existing Fast Forward switch. This would target 2x gameplay and 1x music without a selectable Delta 2x option.
 
-This is a new, **unimplemented and untested** approach. Do not claim it works yet. A three-VBlank-per-game-update limiter would target 20 virtual updates/sec; Delta 3x would yield 60 real updates/sec, versus retail 30 at 1x, with every frame rendered. It should avoid the ROM-only prototype's catch-up rendering problems, but must be measured under load. Confirm S first.
+This is a new, **unimplemented and untested** approach. Do not claim it works yet. A three-VBlank-per-game-update limiter would target 20 virtual updates/sec; Delta 3x would yield 60 real updates/sec, versus retail 30 at 1x, with every frame rendered. It should avoid the ROM-only prototype's catch-up rendering problems, but must be measured under load. S has now been confirmed by the user.
 
 DeltaCore's current AudioManager uses AVAudioUnitTimePitch and assigns its rate to the emulator rate. Pitch stays independent of the time stretch; do not assume an octave/pitch correction is necessary. Reference:
 https://github.com/rileytestut/DeltaCore/blob/869042a5699b19df3cf9f3369a950737ff818149/DeltaCore/Emulator%20Core/Audio/AudioManager.swift
@@ -147,7 +147,7 @@ Pending verification before any V6 delivery: smooth movement/follower/turn/stop 
 
 ## Recovery priorities
 
-1. Confirm the user's device and installed Delta version/default multiplier; do not re-ask about selecting 2x.
+1. Use the user's confirmed default multiplier 3. Do not re-ask about selecting 2x or confirming the multiplier.
 2. Recover the workspace if available and preserve the local V5.2 commit and ignored V6 research. Never overwrite the user's original/save.
 3. Decide implementation based on the confirmed multiplier and the user's existing Fast Forward workflow. The default-3x compensation approach is promising but untested.
 4. Produce a concrete, measured build; no prototype can be labelled finished V6 yet.
