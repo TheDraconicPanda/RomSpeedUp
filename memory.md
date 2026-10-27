@@ -3,6 +3,51 @@
 Updated 2026-10-24. This is project context and reproducible guidance; check the
 current checkout, inputs and tools before acting on historical observations.
 
+## V6 follow-up — 2026-10-27
+
+The player requested a new build from the original Europe ROM for 2x gameplay
+with normal music. They confirmed Delta's only available Fast Forward is 3x.
+Current branch `feature/v6-double-speed`; see `docs/v6-delta-3x.md`.
+V6 requires that default **3x Fast Forward enabled**. The original main loop
+waits for three physical VBlanks per update (native 2/3 retail), while music
+score durations are tripled (native 1/3 tempo). Thus it targets 2x gameplay
+and normal score tempo under Delta 3x. Independent hardware timers/heavy scenes
+may vary; music envelopes/portamento/fades are not fully time-stretched, and
+effects/cries retain their assets and follow Delta's fast-forward audio.
+Earlier ROM-only V6 prototypes are superseded and must not be delivered.
+
+Build with `scripts/build-v6.py` from `private/original/user-original.nds`,
+SHA256 `94ad298c32bbcc623d042ca20f46cfcaa399a8e814260cc5645dfe5f4c167c17`.
+Candidate `build/v6-3x-001/candidate.nds`, SHA256
+`757eccf7f9846e32caeac9166f2353f9077aec85d9fb24eab73819f5bba9f228`.
+V5 selective patches are not inherited. All non-sound NitroFS payloads,
+ARM7, overlays, music banks/waves and effects are preserved and checked.
+
+48 unit/pipeline tests and 640 movement-state + 48 pacing native cases pass.
+Fresh target boot/import reaches the user's save; field movement, trainer
+dialogue, battle entry/attacks/text, in-game saving and separate fresh battery
+save reload were observed. Reloaded Continue time is 85:29 and resumes Union
+Cave. Actual target Goldenrod loads through a disposable standard warp with
+temporary code restored. Main updates are 120/360 frames in cave and city,
+versus original 180/360. Actual target city movement replay runs 30/90 frames.
+Delta hardware/audio listening/full-game validation remains pending.
+
+**Import a battery save and fresh boot. Do not use old quick savestates.**
+The sound archive grows and later files shift 67584 bytes; old states retain
+obsolete cached NitroFS offsets and reproduced an instruction fault. Fresh
+boots and checkpoints created by the actual V6 target do not show that fault.
+Original user ROM/save were never overwritten.
+
+Verified private delivery ZIP:
+`build/v6-delivery/Pokemon_SoulSilver_V6_FOR_DELTA_3X_EXPERIMENTAL.zip`,
+60695388 bytes, SHA256
+`844fb12257614835deda54b92569768ba2b08a6f9b7b1fd95aceaa0871e06ac0`.
+Contains ready ROM, readme, checksums and build report; no user save.
+**Drive upload is NOT confirmed:** two upload calls stalled and were interrupted
+without any API result or file ID. Subsequent searches in the authorized folder
+returned no V6 file. Do not claim permission/quota/API errors without evidence,
+and do not claim the ZIP is saved to Drive. Local ZIP remains ready to deliver.
+
 ## v5 follow-up — 2026-10-25
 
 ### V5.2 follower correction — 2026-10-27

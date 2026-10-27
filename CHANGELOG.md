@@ -1,5 +1,15 @@
 # Changelog
 
+## V6 — experimental Delta 3x calibration (2026-10-27)
+
+- Built from the original European ROM. Three-VBlank main-loop pacing targets
+  2x gameplay under the player's confirmed 3x Delta Fast Forward setting.
+- Retimed music scores to compensate for 3x audio acceleration; retained banks,
+  waves and effect payloads. V5 selective modifications are not inherited.
+- Added guarded container/sound graph validation, native pacing tests and
+  fresh-boot gameplay checks. Use battery saves; old savestates are incompatible.
+  See [implementation and limits](docs/v6-delta-3x.md).
+
 ## V5.2 — experimental city follower correction (2026-10-27)
 
 - Matched active ordinary follower walking/running timing to the V5.1 city player

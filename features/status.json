@@ -111,5 +111,16 @@
     "target_sha256": "a5ba152ccfa0a794396e8b3d428822d1226b78676873764f312795ded7bd1539",
     "details": "docs/v5-2-follower.md",
     "Delta_validated": false
+  },
+  "v6": {
+    "status": "experimental",
+    "baseline": "exact original Europe ROM",
+    "requires_delta_fast_forward": 3,
+    "nominal_gameplay_ratio": 2,
+    "nominal_music_ratio": 1,
+    "target_sha256": "757eccf7f9846e32caeac9166f2353f9077aec85d9fb24eab73819f5bba9f228",
+    "details": "docs/v6-delta-3x.md",
+    "Delta_validated": false,
+    "save_states": "Use battery-save import and fresh boot; old states cache obsolete file offsets"
   }
 }
