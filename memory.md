@@ -3,7 +3,39 @@
 Updated 2026-10-24. This is project context and reproducible guidance; check the
 current checkout, inputs and tools before acting on historical observations.
 
-## V6 follow-up — 2026-10-27
+## Corrected V6 requirement — 2026-10-28 (current)
+
+The player clarified that Delta's speed was only a comparison. They want the
+**original ROM itself to run gameplay at 2x with ALL sounds at normal speed,
+and Delta Fast Forward OFF**. The delivered Delta-3x compensation ROM below
+does not satisfy this clarified requirement. Do not deliver it again as the
+requested standalone V6. Work is on `feature/v6-rom-only-2x`.
+
+Current experimental build `build/v6-native-001/candidate.nds`, SHA256
+`e369d3d641551d4ca75cacc548608f5f6bdd66f45ff7bcaa960c655838cb1033`.
+Reproduce with `scripts/build-v6-native.py` from the exact original Europe ROM;
+see `docs/v6-rom-only.md`. Earlier prototypes remain private research.
+The new build retains original sound assets/ARM7 and normal physical audio
+cadence. Its virtual clock targets 60 updates/s, with graphics on alternate ticks.
+Equivalent data cipher optimization passes 565 original/reference comparisons.
+All 5653 native cases and 49 unit/pipeline tests pass.
+
+Fresh target boot/import/field movement, trainer battle, attacks, enemy fainting,
+in-game saving and fresh exported-save import/boot have been exercised. Cave
+replay gives 1801 logic / 900 audio updates per 1800 hardware frames, near 2x;
+Goldenrod moving replay gives 315 logic / 179 audio updates in 360 frames versus
+retail 180 logic: measured **1.75x** in that heavy city. Report this limitation;
+no claim that all scenes run at exactly 2x. Delta/full-game validation is pending.
+Use battery-save import/fresh boot; old states can resume inside replaced code.
+Verified delivery ZIP:
+`build/v6-native-delivery/Pokemon_SoulSilver_V6_ROM_ONLY_2X_EXPERIMENTAL.zip`,
+60679799 bytes, SHA256
+`7bf31d7c26be4793c1125a754d8ab027b973b00f5d94c9ca30b4b93b8a26e8d7`.
+It contains the ready ROM, readme, checksum and build report, with no save data.
+Upload is being attempted from an identical `/tmp` copy; require metadata
+confirmation before claiming this corrected ROM-only build is on Drive.
+
+## Earlier V6 Delta compensation build — 2026-10-27 (superseded requirement)
 
 The player requested a new build from the original Europe ROM for 2x gameplay
 with normal music. They confirmed Delta's only available Fast Forward is 3x.

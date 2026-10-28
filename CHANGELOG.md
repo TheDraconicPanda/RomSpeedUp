@@ -1,5 +1,15 @@
 # Changelog
 
+## Corrected V6 — experimental ROM-only build (2026-10-28)
+
+- Clarified requirement: original ROM, nominal 2x gameplay, normal music/cry/effect
+  clocks, Delta Fast Forward OFF. Prior Delta-3x compensation build is superseded.
+- Separated virtual game, graphics and physical sound clocks; retained original
+  sound assets and ARM7. Optimized the equivalent data cipher to reduce overhead.
+- Fresh cave timing reaches approximately 2x; Goldenrod remains CPU-limited at
+  measured 1.75x. Added 5653 native checks and protected-asset verification.
+  See [implementation, evidence and limits](docs/v6-rom-only.md).
+
 ## V6 — experimental Delta 3x calibration (2026-10-27)
 
 - Built from the original European ROM. Three-VBlank main-loop pacing targets

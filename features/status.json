@@ -113,7 +113,7 @@
     "Delta_validated": false
   },
   "v6": {
-    "status": "experimental",
+    "status": "superseded-misunderstood-requirement",
     "baseline": "exact original Europe ROM",
     "requires_delta_fast_forward": 3,
     "nominal_gameplay_ratio": 2,
@@ -122,5 +122,17 @@
     "details": "docs/v6-delta-3x.md",
     "Delta_validated": false,
     "save_states": "Use battery-save import and fresh boot; old states cache obsolete file offsets"
+  },
+  "v6-rom-only": {
+    "status": "experimental",
+    "baseline": "exact original Europe ROM",
+    "requires_delta_fast_forward": false,
+    "nominal_gameplay_ratio": 2,
+    "audio_assets": "byte-identical to original; physical audio clock retained",
+    "measured_city_ratio": 1.75,
+    "measured_lighter_scene_ratio": 1.988888888888889,
+    "target_sha256": "e369d3d641551d4ca75cacc548608f5f6bdd66f45ff7bcaa960c655838cb1033",
+    "details": "docs/v6-rom-only.md",
+    "Delta_validated": false
   }
 }
