@@ -24,8 +24,19 @@ Goldenrod: 575 game / 300 sound updates per 600 physical frames, about 1.92x.
 Native checks: 2160 clock, 56 context, two publication, 640 state, 112 movement,
 565 cipher. Pipeline: 50 passed. Original ROM/save remain unchanged. Delta and
 special battle modes remain unverified. Fast Forward OFF; import a battery save
-and boot fresh, avoiding old quick savestates. Delivery is recorded below once
-Drive confirms the new ZIP. No save data is packaged.
+and boot fresh, avoiding old quick savestates. Drive delivery is confirmed below. No save data is packaged.
+
+### V6.1 Drive delivery confirmed — 2026-10-28
+
+ZIP `Pokemon_SoulSilver_V6_1_ROM_ONLY_2X_EXPERIMENTAL.zip`, **60826591 bytes**,
+SHA256 `a182c3fe7c4fffbdcb3edf90271c217819251cda5b5044e550d75f4ebf437e28`.
+Drive upload returned success; separate metadata readback confirmed exact name,
+size and parent `1J7caSyzIpCCnbDhVRo7x4OX5CEijfpIV`.
+<https://drive.google.com/file/d/1e4baq4XPcpjy360KmBkaDPusq3iuPJ-5/view?usp=drivesdk>
+Private package: `build/v61-delivery/`, ready ROM/readme/checksums/report only.
+The old V6 Drive file `1eQTctgmdvEv3TvnxRQQBwZ9oopK0QZ4H` was renamed
+`WITHDRAWN_BROKEN_BATTLE_GRAPHICS_Pokemon_SoulSilver_V6_ROM_ONLY_2X_EXPERIMENTAL.zip`;
+its bytes and ID were preserved. Implementation commit `0de39b3`.
 
 ### Withdrawn V6 historical delivery and diagnostics
 

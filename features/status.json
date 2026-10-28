@@ -148,6 +148,8 @@
     "battle_coverage": "one trainer battle, two subsequent wild battles, manual Pokemon switch, return to field",
     "save_reload": "exported changed battery save and fresh boot/import passed",
     "details": "docs/v6-1-battle-graphics.md",
-    "Delta_validated": false
+    "Delta_validated": false,
+    "drive_file_id": "1e4baq4XPcpjy360KmBkaDPusq3iuPJ-5",
+    "drive_verified_bytes": 60826591
   }
 }

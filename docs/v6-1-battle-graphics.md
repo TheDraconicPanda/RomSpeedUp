@@ -90,3 +90,11 @@ Delta, double battles, unusual forms, link battles and full-game progression
 remain untested. Timing varies with scene load; 2x is a target, not a guarantee.
 Normal audio assets/cadence are verified; Delta listening is still required.
 Import a battery save and boot fresh. Avoid quick savestates from V6 or earlier.
+
+
+## Private delivery
+
+Drive confirmed the new ZIP and separate readback verified its name, 60826591
+bytes and authorized folder. [V6.1 download](https://drive.google.com/file/d/1e4baq4XPcpjy360KmBkaDPusq3iuPJ-5/view?usp=drivesdk).
+ZIP SHA256: `a182c3fe7c4fffbdcb3edf90271c217819251cda5b5044e550d75f4ebf437e28`.
+The previous V6 file is marked WITHDRAWN_BROKEN_BATTLE_GRAPHICS; do not use it.
