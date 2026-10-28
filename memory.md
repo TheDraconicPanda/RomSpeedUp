@@ -39,6 +39,23 @@ quota or API error was returned, and no file ID exists to cite. The verified
 local ZIP is ready for download; do not substitute the old Delta-3x Drive link.
 Local implementation commit: `b5bdc48` on `feature/v6-rom-only-2x` (not pushed).
 
+Further Drive retry on 2026-10-28 still did not transfer the corrected build.
+Direct folder listing via `google_drive_fetch` confirms only the older files;
+legacy search can return empty even for known children, so prefer folder fetch.
+A server-side copy of the old ZIP succeeded (temporary ID
+`17wHoVkgYkjopFoX3fksSWQ0BwwdcQYbu`), proving folder writes work. Binary
+`update_file(file_uri=...)` stalled and metadata retained the old 60695388-byte
+contents. The temporary copy was then deleted successfully; do not use its URL.
+Uploading a small 879300-byte BPS also stalled and was interrupted without a file
+ID. Thus the observed problem is local-file transfer, not just ZIP size or the
+folder's changed location; no actual permission/quota/API error was returned.
+
+Private fallback patch is
+`build/v6-native-delivery/Pokemon_SoulSilver_V6_ROM_ONLY_2X.bps`, SHA256
+`84331045865f5b4e9e26ec8a8debe5af810ac929ba7fdf68c3805f9130f0fc41`.
+Independent BPS decoding verifies it recreates the exact standalone candidate
+from the original Europe ROM. It is NOT confirmed on Drive either.
+
 ## Earlier V6 Delta compensation build — 2026-10-27 (superseded requirement)
 
 The player requested a new build from the original Europe ROM for 2x gameplay
