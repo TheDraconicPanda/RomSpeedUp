@@ -32,14 +32,17 @@ Verified delivery ZIP:
 60679799 bytes, SHA256
 `7bf31d7c26be4793c1125a754d8ab027b973b00f5d94c9ca30b4b93b8a26e8d7`.
 It contains the ready ROM, readme, checksum and build report, with no save data.
-Drive delivery of this corrected build is **not confirmed**: upload calls from
-verified `/tmp` staging paths returned no connector result within 45/120-second
-bounded waits. Subsequent exact-name searches returned no file. No permission,
-quota or API error was returned, and no file ID exists to cite. The verified
-local ZIP is ready for download; do not substitute the old Delta-3x Drive link.
+**Corrected ROM-only V6 Drive delivery confirmed on 2026-10-28:**
+<https://drive.google.com/file/d/1eQTctgmdvEv3TvnxRQQBwZ9oopK0QZ4H/view?usp=drivesdk>.
+Upload returned success, and separate metadata readback confirms the exact
+ROM_ONLY filename, 60679799 bytes and authorized destination folder. This is
+the corrected build for **Fast Forward OFF**, not the earlier Delta-3x file.
+The successful fresh call used `/tmp/v6-native.zip`, explicitly yielded control
+before invoking the upload, and awaited its actual result without a JS timeout
+race. Earlier calls had stalled; their root cause remains unconfirmed.
 Local implementation commit: `b5bdc48` on `feature/v6-rom-only-2x` (not pushed).
 
-Further Drive retry on 2026-10-28 still did not transfer the corrected build.
+Earlier Drive retry diagnostics on 2026-10-28 (before the success above):
 Direct folder listing via `google_drive_fetch` confirms only the older files;
 legacy search can return empty even for known children, so prefer folder fetch.
 A server-side copy of the old ZIP succeeded (temporary ID
