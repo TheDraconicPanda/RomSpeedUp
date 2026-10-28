@@ -5,6 +5,30 @@ current checkout, inputs and tools before acting on historical observations.
 
 ## Corrected V6 requirement — 2026-10-28 (current)
 
+### V6.1 battle correction — current experimental replacement
+
+Delivered V6 native-001 is **broken**: white boxes and trainer/Pokemon sprite
+substitution. Do not redeliver it. Work is on `fix/v6-battle-rendering`.
+Root cause reproduced: alternating publication let sprite buffer flags clear
+before upload; old trainer replay loses 22 active-sprite image/palette updates.
+V6.1 restores every publication callback/queue and restricts draw skipping and
+conditional waiting to the exact field callback. All other contexts pass through.
+See `docs/v6-1-battle-graphics.md` for implementation, reproduction and limits.
+
+Current V6.1: `build/v61-candidate-001/candidate.nds`, SHA256
+`81d63f41e1c5f29a03a30fa1417222ffdb956bf4a201c846df4a26197ae855f1`.
+Build with `scripts/build-v61.py` from the original Europe ROM. Target-created
+trainer, two following wild battles and manual Dragonite switch show **zero
+active-sprite upload losses**. In-game save/export/fresh boot/reload succeeded.
+Goldenrod: 575 game / 300 sound updates per 600 physical frames, about 1.92x.
+Native checks: 2160 clock, 56 context, two publication, 640 state, 112 movement,
+565 cipher. Pipeline: 50 passed. Original ROM/save remain unchanged. Delta and
+special battle modes remain unverified. Fast Forward OFF; import a battery save
+and boot fresh, avoiding old quick savestates. Delivery is recorded below once
+Drive confirms the new ZIP. No save data is packaged.
+
+### Withdrawn V6 historical delivery and diagnostics
+
 The player clarified that Delta's speed was only a comparison. They want the
 **original ROM itself to run gameplay at 2x with ALL sounds at normal speed,
 and Delta Fast Forward OFF**. The delivered Delta-3x compensation ROM below
@@ -13,7 +37,7 @@ requested standalone V6. Work is on `feature/v6-rom-only-2x`.
 
 Current experimental build `build/v6-native-001/candidate.nds`, SHA256
 `e369d3d641551d4ca75cacc548608f5f6bdd66f45ff7bcaa960c655838cb1033`.
-Reproduce with `scripts/build-v6-native.py` from the exact original Europe ROM;
+Historical reproduction uses `scripts/build-v6-native.py --legacy-rejected` from the exact original Europe ROM;
 see `docs/v6-rom-only.md`. Earlier prototypes remain private research.
 The new build retains original sound assets/ARM7 and normal physical audio
 cadence. Its virtual clock targets 60 updates/s, with graphics on alternate ticks.
