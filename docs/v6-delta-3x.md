@@ -90,9 +90,11 @@ Music and fanfare timing should be checked on the player's Delta device.
   Player/follower movement and the city screenshot were reviewed.
 - Delivery ZIP is 60695388 bytes, SHA256
   `844fb12257614835deda54b92569768ba2b08a6f9b7b1fd95aceaa0871e06ac0`.
-  Its ROM checksum and ZIP integrity were verified. Two Drive upload calls
-  stalled and were interrupted, with no file ID returned. Subsequent exact
-  folder searches returned no V6 result. **No Drive delivery is confirmed.**
+  Its ROM checksum and ZIP integrity were verified. Earlier upload calls stalled.
+  On 2026-10-28, uploading an identical staged `/tmp` copy succeeded; Drive
+  metadata readback confirms file ID `1vXN7j74XGBHCOnKRh9TazrotbwR1J2ZF`, exact
+  filename, 60695388 bytes and the authorized folder ID. Confirmed delivery:
+  <https://drive.google.com/file/d/1vXN7j74XGBHCOnKRh9TazrotbwR1J2ZF/view?usp=drivesdk>.
 
 Do not load a V3/V4/V5/original quick savestate into V6. NitroFS metadata cached
 in an old state references original physical file positions, which can cause

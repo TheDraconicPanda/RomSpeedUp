@@ -43,10 +43,15 @@ Verified private delivery ZIP:
 60695388 bytes, SHA256
 `844fb12257614835deda54b92569768ba2b08a6f9b7b1fd95aceaa0871e06ac0`.
 Contains ready ROM, readme, checksums and build report; no user save.
-**Drive upload is NOT confirmed:** two upload calls stalled and were interrupted
-without any API result or file ID. Subsequent searches in the authorized folder
-returned no V6 file. Do not claim permission/quota/API errors without evidence,
-and do not claim the ZIP is saved to Drive. Local ZIP remains ready to deliver.
+**Drive upload confirmed on 2026-10-28:**
+<https://drive.google.com/file/d/1vXN7j74XGBHCOnKRh9TazrotbwR1J2ZF/view?usp=drivesdk>.
+Metadata readback confirms the exact filename, 60695388 bytes and authorized
+parent folder `1J7caSyzIpCCnbDhVRo7x4OX5CEijfpIV`. Earlier workspace-path upload
+calls stalled without an API result. A retry using an identical, checksum-verified
+copy staged at `/tmp/Pokemon_SoulSilver_V6_FOR_DELTA_3X_EXPERIMENTAL.zip` succeeded.
+The underlying cause of earlier stalls is unconfirmed; no permission/quota/API
+error was returned. The Drive folder is now under `05 - Projects & Development`
+but retains the same ID. The local verified ZIP remains available.
 
 ## v5 follow-up — 2026-10-25
 
