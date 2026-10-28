@@ -32,8 +32,12 @@ Verified delivery ZIP:
 60679799 bytes, SHA256
 `7bf31d7c26be4793c1125a754d8ab027b973b00f5d94c9ca30b4b93b8a26e8d7`.
 It contains the ready ROM, readme, checksum and build report, with no save data.
-Upload is being attempted from an identical `/tmp` copy; require metadata
-confirmation before claiming this corrected ROM-only build is on Drive.
+Drive delivery of this corrected build is **not confirmed**: upload calls from
+verified `/tmp` staging paths returned no connector result within 45/120-second
+bounded waits. Subsequent exact-name searches returned no file. No permission,
+quota or API error was returned, and no file ID exists to cite. The verified
+local ZIP is ready for download; do not substitute the old Delta-3x Drive link.
+Local implementation commit: `b5bdc48` on `feature/v6-rom-only-2x` (not pushed).
 
 ## Earlier V6 Delta compensation build — 2026-10-27 (superseded requirement)
 

@@ -102,3 +102,6 @@ Verified delivery archive:
 `Pokemon_SoulSilver_V6_ROM_ONLY_2X_EXPERIMENTAL.zip`, 60679799 bytes, SHA256
 `7bf31d7c26be4793c1125a754d8ab027b973b00f5d94c9ca30b4b93b8a26e8d7`.
 The ZIP CRC check passes, and extracting its ROM reproduces the candidate SHA256.
+Drive upload attempts did not return a file ID; subsequent searches found no
+matching ROM-only V6 file. Local delivery is available, but Drive saving is
+unconfirmed. Do not link the old Delta-3x file as this build.
