@@ -1,5 +1,12 @@
 # Corrected V6 — standalone gameplay acceleration, normal sound
 
+**Withdrawn after player reports of white boxes and trainer/Pokemon sprite
+substitution.** The alternate-tick graphics publication described below loses
+pending sprite uploads. See [V6.1 correction and validation](v6-1-battle-graphics.md).
+The following is historical evidence; the limited smoke checks missed this bug.
+The old builder now defaults to a conservative graphics control, not the delivered
+hash. Add `--legacy-rejected` only to reproduce that broken historical ROM.
+
 The player clarified that Delta 3x was a comparison, not an intended emulator
 setting. This build starts from the original European ROM and targets 2x game
 updates with normal audio at **normal emulator speed / Fast Forward OFF**.

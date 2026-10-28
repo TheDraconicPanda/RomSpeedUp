@@ -1,5 +1,16 @@
 # Changelog
 
+## V6.1 — experimental battle graphics correction (2026-10-28)
+
+- Withdrew the delivered V6 after white boxes and substituted battle sprites.
+  Reproduced 22 lost uploads for active sprites in the old trainer replay.
+- Restored every graphics publication callback/queue and scoped draw skipping
+  to the exact field callback. Trainer, two consecutive wild battles and manual
+  switching have zero lost active-sprite uploads; save/reload also passed.
+- Goldenrod measures 575 game / 300 sound updates per 600 hardware frames,
+  about 1.92x retail gameplay with the original sound clock. Delta validation
+  remains pending. See [evidence and limits](docs/v6-1-battle-graphics.md).
+
 ## Corrected V6 — experimental ROM-only build (2026-10-28)
 
 - Clarified requirement: original ROM, nominal 2x gameplay, normal music/cry/effect

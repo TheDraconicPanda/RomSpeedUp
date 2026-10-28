@@ -124,7 +124,7 @@
     "save_states": "Use battery-save import and fresh boot; old states cache obsolete file offsets"
   },
   "v6-rom-only": {
-    "status": "experimental",
+    "status": "rejected-battle-graphics",
     "baseline": "exact original Europe ROM",
     "requires_delta_fast_forward": false,
     "nominal_gameplay_ratio": 2,
@@ -133,6 +133,23 @@
     "measured_lighter_scene_ratio": 1.988888888888889,
     "target_sha256": "e369d3d641551d4ca75cacc548608f5f6bdd66f45ff7bcaa960c655838cb1033",
     "details": "docs/v6-rom-only.md",
-    "Delta_validated": false
+    "Delta_validated": false,
+    "Delta_feedback": "First battle white boxes; subsequent battle trainer sprite replaces Pokemon"
+  },
+  "v6.1": {
+    "status": "experimental-battle-graphics-corrected",
+    "baseline": "exact original Europe ROM",
+    "requires_delta_fast_forward": false,
+    "nominal_gameplay_ratio": 2,
+    "measured_city_ratio": 1.9166666666666667,
+    "audio_assets": "byte-identical to original; physical sound update every two VBlanks",
+    "target_sha256": "81d63f41e1c5f29a03a30fa1417222ffdb956bf4a201c846df4a26197ae855f1",
+    "active_sprite_upload_losses": 0,
+    "battle_coverage": "one trainer battle, two subsequent wild battles, manual Pokemon switch, return to field",
+    "save_reload": "exported changed battery save and fresh boot/import passed",
+    "details": "docs/v6-1-battle-graphics.md",
+    "Delta_validated": false,
+    "drive_file_id": "1e4baq4XPcpjy360KmBkaDPusq3iuPJ-5",
+    "drive_verified_bytes": 60826591
   }
 }

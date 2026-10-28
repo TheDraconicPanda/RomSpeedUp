@@ -17,7 +17,7 @@ def compile_code(source,address):
  assert all(i.size==2 or i.mnemonic in ('bl','blx') for i in ins)
  return raw
 
-def _build_exact(source):
+def _build_exact(source, *, graphics_safe=True):
     r=ndspy.rom.NintendoDSRom(source);orig=bytes(ndspy.codeCompression.decompress(r.arm9));arm=bytearray(orig);BASE=0x2000000
     # Compact equivalent direction wrappers free room inside their original
     # allocation. The final five words are private scheduler state, not code.
@@ -210,6 +210,16 @@ def _build_exact(source):
     assert len(cipher_jump)==8
     arm[0x1ff44:0x1ff4c]=cipher_jump
 
+    if graphics_safe:
+        # Graphics callbacks publish queued resources, not just pictures.
+        # They must not be skipped when battle states allocate/free textures.
+        # Keep an unconditional physical VBlank between game updates, and keep
+        # every stock graphics entry/callback/queue/swap path intact.
+        for offset,size in [(0xe10,4),(0xe1e,4),(0xe38,4),(0xe42,4),
+                            (0xb7418,4),(0xbfcc8,4),(0xf6318,4)]:
+            arm[offset:offset+size]=orig[offset:offset+size]
+        ov.data[0x21e6022-ov.ramAddress:0x21e6026-ov.ramAddress]=branch(0x21e6022,0x21e6220)
+
     p=bytearray(ndspy.codeCompression.compress(arm,True));settings=ndspy.code.MainCodeFile(r.arm9,BASE).codeSettingsOffs;struct.pack_into('<I',p,settings+20,BASE+len(p));struct.pack_into('<I',arm,settings+20,BASE+len(p));assert ndspy.codeCompression.decompress(p)==arm
     start=struct.unpack_from('<I',source,0x20)[0];assert start+len(p)+len(r.arm9PostData)<=struct.unpack_from('<I',source,0x50)[0]
     result=bytearray(source);result[start:start+len(p)+len(r.arm9PostData)]=p+r.arm9PostData;struct.pack_into('<I',result,0x2c,len(p));struct.pack_into('<H',result,0x15e,crc16(result[:0x15e]))
@@ -220,12 +230,12 @@ def _build_exact(source):
      arm_gates=arm_gates,cipher=cipher_at,state_bytes=len(state),cipher_bytes=len(cipher))
 
 
-def build(source):
+def build(source, *, graphics_safe=True):
     """Require exact original; verify executable edits and protected payloads."""
     expected='94ad298c32bbcc623d042ca20f46cfcaa399a8e814260cc5645dfe5f4c167c17'
     if digest(source)!=expected:
         raise ValueError('Standalone V6 requires the exact original Europe ROM')
-    target,report=_build_exact(source)
+    target,report=_build_exact(source,graphics_safe=graphics_safe)
     old,new=map(ndspy.rom.NintendoDSRom,[source,target])
     before,after=[bytes(ndspy.codeCompression.decompress(r.arm9)) for r in (old,new)]
     if digest(before)!='534df6737a9a852bf24c9e63e93453897d9018a17e0685346fd37050123305a5':
@@ -254,11 +264,14 @@ def build(source):
     layout=lambda m:[(s.ramAddress,len(s.data),s.bssSize,s.implicit) for s in m.sections]
     if layout(oldmain)!=layout(newmain): raise ValueError('Executable memory layout changed')
     if len(source)!=len(target): raise ValueError('Cartridge size changed')
-    report.update(version='v6-rom-only',status='experimental',release_ready=False,
+    report.update(version='v6.1-candidate' if graphics_safe else 'v6-rom-only-rejected',
+        status='under-validation' if graphics_safe else 'rejected-battle-graphics',release_ready=False,
         source_sha256=digest(source),target_sha256=digest(target),rom_bytes=len(target),
         emulator_fast_forward_required=False,nominal_gameplay_multiplier=2,
         audio_assets='byte-identical to original',physical_audio_update_period=2,
-        measured_city_multiplier=1.75,measured_lighter_scene_multiplier=358/180,
-        limitations=['CPU-heavy scenes fall below 2x; Goldenrod measured about 1.75x',
+        graphics_safe=graphics_safe,
+        measured_city_multiplier=None if graphics_safe else 1.75,
+        measured_lighter_scene_multiplier=None if graphics_safe else 358/180,
+        limitations=['Battle rendering and scene timing require regression validation',
                      'Device validation and full-game graphics coverage pending'])
     return target,report
