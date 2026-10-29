@@ -137,7 +137,7 @@
     "Delta_feedback": "First battle white boxes; subsequent battle trainer sprite replaces Pokemon"
   },
   "v6.1": {
-    "status": "experimental-battle-graphics-corrected",
+    "status": "superseded-field-ui-flicker",
     "baseline": "exact original Europe ROM",
     "requires_delta_fast_forward": false,
     "nominal_gameplay_ratio": 2,
@@ -150,6 +150,28 @@
     "details": "docs/v6-1-battle-graphics.md",
     "Delta_validated": false,
     "drive_file_id": "1e4baq4XPcpjy360KmBkaDPusq3iuPJ-5",
-    "drive_verified_bytes": 60826591
+    "drive_verified_bytes": 60826591,
+    "Delta_feedback": "Lower-screen menu button flashes frantically; reproduced alternating empty 2D sprite frames"
+  },
+  "v6.2": {
+    "status": "experimental",
+    "baseline": "exact original Europe ROM",
+    "requires_delta_fast_forward": false,
+    "target_sha256": "b5416f371ae5c8ec53bb5814be59d7e34a186975fdfe7c8d09e377f25e29eba5",
+    "sprite_drawing": "stock every update",
+    "field_menu_sprite_step": "4096 vs stock 8192 (half step with doubled nominal updates)",
+    "idle_static_icon_changes": 0,
+    "idle_full_sprite_draws": 3600,
+    "idle_hardware_frames": 240,
+    "details": "docs/v6-2-field-ui.md",
+    "Delta_validated": false,
+    "measured_city_ratio": 1.7533333333333334,
+    "active_sprite_upload_losses": 0,
+    "battle_coverage": "One trainer battle and three subsequent wild battles completed and returned to field",
+    "native_menu_activation_cases": 128,
+    "pipeline_tests_passed": 51,
+    "save_reload": "Changed battery save exported and imported on separate fresh boot; saved cave position restored",
+    "drive_file_id": "1yhKTLWud3EcjYUES-65WZ7DgsBMmd4yJ",
+    "drive_verified_bytes": 60826897
   }
 }
