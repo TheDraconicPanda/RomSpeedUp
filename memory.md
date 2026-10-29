@@ -5,7 +5,31 @@ current checkout, inputs and tools before acting on historical observations.
 
 ## Corrected V6 requirement — 2026-10-28 (current)
 
-### V6.1 battle correction — current experimental replacement
+### V6.2 field-menu correction — current work (2026-10-29)
+
+Player reports lower-screen menu touch button flashes frantically in V6.1.
+Confirmed **rendering flicker**, not only sped-up animation: the field-only 2D
+sprite callback gate publishes alternate empty OAM frames. V6.1 is superseded.
+Work is on `fix/v61-touch-ui`; see `docs/v6-2-field-ui.md`.
+
+V6.2 restores the stock 2D draw callback on every update and halves the field-menu
+sprite animation step: original FX32(2)=8192 becomes FX32(1)=4096. Do not use
+research candidate 001, which mistakenly used 2048 before checking the original.
+Correct final candidate: `build/v62-candidate-002/candidate.nds`, SHA256
+`b5416f371ae5c8ec53bb5814be59d7e34a186975fdfe7c8d09e377f25e29eba5`.
+Builder: `scripts/build-v62.py` from the exact original Europe ROM.
+
+Final target fresh boot and 546-frame UI replay passed: 240 idle menu updates,
+3600 full draws (15 sprites/update), zero static-icon changes; touch opens the
+party menu and returns to field. V6.1 comparison: 1800 draws and 237 icon changes.
+Menu speeds remain 4096 after return. Native checks pass including 128 menu-call
+cases; 51 pipeline tests pass. Final-target trainer plus three subsequent wild battles passed with zero lost
+active-sprite uploads; all returned to field. Goldenrod measured 526 game / 300
+sound updates per 600 hardware frames (1.75x retail, slower than V6.1). In-game save/export/fresh reload passed. Drive delivery is recorded below once
+confirmed. Keep Fast Forward OFF and use fresh battery-save
+boot, never quickstates from an older build. Original ROM/save remain untouched.
+
+### V6.1 battle correction — superseded by V6.2 for menu flicker
 
 Delivered V6 native-001 is **broken**: white boxes and trainer/Pokemon sprite
 substitution. Do not redeliver it. Work is on `fix/v6-battle-rendering`.

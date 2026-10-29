@@ -1,5 +1,14 @@
 # Changelog
 
+## V6.2 — experimental lower-screen menu correction (2026-10-29)
+
+- Reproduced V6.1's alternating empty menu-sprite frames. Restored the original
+  2D draw callback on every update while retaining V6.1's battle upload fix.
+- Halved the standard field-menu animation step relative to retail to compensate
+  for doubled gameplay updates; touch input and drawing remain responsive.
+- Added per-frame menu replay evidence, actual menu activation instruction checks
+  and protected-asset guards. See [evidence and limits](docs/v6-2-field-ui.md).
+
 ## V6.1 — experimental battle graphics correction (2026-10-28)
 
 - Withdrew the delivered V6 after white boxes and substituted battle sprites.

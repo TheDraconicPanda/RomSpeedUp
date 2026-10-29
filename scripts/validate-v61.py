@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Execute V6.1 clocks, field-context guards and unskipped upload dispatch."""
+"""Execute V6.1/V6.2 clocks, context guards and unskipped upload dispatch."""
 import argparse,importlib.util,itertools,json,random,struct,sys
 from pathlib import Path
 import ndspy.rom,ndspy.codeCompression
@@ -54,7 +54,7 @@ for callback,phase in itertools.product([0,info['field_callback'],0x02239731,0x0
     new.write(S,callback);cpu.mem_write(D,struct.pack('<3I',phase,phase,0))
     for name,destination,args in [('wait',0x020d0e6c,(1,1)),('sprite',0x02024eb4,(ARG,0x12345678))]:
         calls.clear();new.call(info[name],*args)
-        expected=int(callback!=info['field_callback'] or phase==1)
+        expected=int((name=='sprite' and info['version']=='v6.2') or callback!=info['field_callback'] or phase==1)
         assert len(calls)==expected,(callback,phase,name,calls)
         if expected:assert calls[0]==(destination,*args)
         assert cpu.reg_read(UC_ARM_REG_SP)==v.STACK
@@ -98,5 +98,26 @@ for size,seed in cases:
         machine.cpu.mem_write(address,data);machine.call(0x0201ff44,address,size,seed)
         assert bytes(machine.cpu.mem_read(address,len(data)))==expected
         assert machine.cpu.reg_read(UC_ARM_REG_SP)==v.STACK
+menu_cases=0
+if info['version']=='v6.2':
+    assert before[0xf6318:0xf631c]==after[0xf6318:0xf631c]
+    ov=ndspy.code.loadOverlayTable(target.arm9OverlayTable,lambda oid,fid:target.files[fid],{27})[27]
+    cpu.mem_write(ov.ramAddress,bytes(ov.data))
+    for call,index in itertools.product(info['menu_activation_calls'],range(64)):
+        data=rng.randbytes(0x104);active=index%2;expected=bytearray(data)
+        expected[0x35]=active;struct.pack_into('<I',expected,0x38,0x1000)
+        cpu.mem_write(address,data)
+        preserved={reg:rng.getrandbits(32) for reg in [UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11]}
+        for reg,value in preserved.items():cpu.reg_write(reg,value)
+        def stop_after(c,at,size,user):
+            if at==call+4:c.reg_write(UC_ARM_REG_PC,STOP|1)
+        stop_hook=cpu.hook_add(UC_HOOK_CODE,stop_after)
+        new.call(call,address,active)
+        cpu.hook_del(stop_hook)
+        assert bytes(cpu.mem_read(address,len(data)))==expected
+        assert all(cpu.reg_read(reg)==value for reg,value in preserved.items())
+        assert cpu.reg_read(UC_ARM_REG_SP)==v.STACK
+        menu_cases+=1
 report=dict(status='passed',clock_cases=clock_cases,context_cases=context_cases,publication_cases=2,state_cases=state_cases,movement_cases=movement_cases,cipher_cases=len(cases))
+if menu_cases:report['menu_activation_cases']=menu_cases
 a.out.parent.mkdir(parents=True,exist_ok=True);a.out.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report))

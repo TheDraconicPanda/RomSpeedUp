@@ -1,5 +1,9 @@
 # V6.1 battle graphics correction
 
+**Superseded by [V6.2](v6-2-field-ui.md):** the player reported field-menu flicker.
+The field-only sprite draw gate still omitted 2D sprites on alternate OAM frames.
+The battle correction below is retained, but V6.1 must not be redelivered as current.
+
 V6.1 replaces the rejected ROM-only V6. It starts from the exact original Europe
 ROM and targets approximately 2x gameplay with original sound at normal speed.
 **Delta Fast Forward must be OFF.** This is still an experimental build.
