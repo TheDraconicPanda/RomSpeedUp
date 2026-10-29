@@ -94,3 +94,12 @@ V6.2 target SHA256:
 Both ROMs are 134217728 bytes. Import a battery save and boot fresh; do not load
 quick savestates from older builds. Delta, special battle modes and full-game
 validation remain pending. Scene speed is approximate, not guaranteed 2x.
+
+
+## Private delivery
+
+[Download V6.2](https://drive.google.com/file/d/1yhKTLWud3EcjYUES-65WZ7DgsBMmd4yJ/view?usp=drivesdk).
+Drive confirmed creation; separate metadata readback verified the V6.2 name,
+60826897-byte size and authorized folder. ZIP SHA256:
+`2cdb9ac297f0dfab8b8659eb81b129fa1da03af831c223d44f2c8ff41701ecb2`.
+[Draft PR #10](https://github.com/TheDraconicPanda/RomSpeedUp/pull/10) is unmerged.

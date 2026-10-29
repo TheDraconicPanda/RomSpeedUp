@@ -170,6 +170,8 @@
     "battle_coverage": "One trainer battle and three subsequent wild battles completed and returned to field",
     "native_menu_activation_cases": 128,
     "pipeline_tests_passed": 51,
-    "save_reload": "Changed battery save exported and imported on separate fresh boot; saved cave position restored"
+    "save_reload": "Changed battery save exported and imported on separate fresh boot; saved cave position restored",
+    "drive_file_id": "1yhKTLWud3EcjYUES-65WZ7DgsBMmd4yJ",
+    "drive_verified_bytes": 60826897
   }
 }
