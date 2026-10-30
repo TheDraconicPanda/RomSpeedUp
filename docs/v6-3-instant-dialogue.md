@@ -75,3 +75,12 @@ Both ROMs are 134217728 bytes. V6.2's approximate scene speeds remain the target
 city performance was not remeasured for this dialogue-only change. V6.3 Delta,
 specialty callback-driven screens and full-game checks remain pending. Avoid old
 quick savestates; import the battery save and boot fresh.
+
+
+## Private delivery
+
+[Download V6.3](https://drive.google.com/file/d/1VhaaGSGl6PQ0-eI2GNctUbsJa0SsnBYa/view?usp=drivesdk).
+Drive confirmed creation, and separate metadata readback verified its name,
+60827138-byte size and authorized folder. ZIP SHA256:
+`2d46012814a27ca1ce1975b5d26842345fc237b5a76332ba5127e502089010f6`.
+V6.2 remains available as the player-confirmed working fallback.

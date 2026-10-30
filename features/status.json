@@ -188,6 +188,8 @@
     "pipeline_tests_passed": 52,
     "save_reload": "Changed disposable battery save exported and loaded on separate fresh boot; saved cave position restored",
     "trainer_regression": "Full trainer battle completed with zero lost active-sprite uploads",
-    "native_printer_cases": 98
+    "native_printer_cases": 98,
+    "drive_file_id": "1VhaaGSGl6PQ0-eI2GNctUbsJa0SsnBYa",
+    "drive_verified_bytes": 60827138
   }
 }
