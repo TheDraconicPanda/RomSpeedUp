@@ -10,7 +10,9 @@ V6.2 restores the original 2D sprite draw callback at ARM9 offset 0xF6318 for
 every update. It retains V6.1's unskipped resource publication and battle paths.
 GPU and field 3D draw pacing remain scoped to the exact field callback. Faster
 gameplay and the original physical sound cadence remain in place; Fast Forward
-must be OFF. V6.2 is experimental and has not been tested on Delta.
+must be OFF. On 2026-10-30 the player confirmed the latest V6.2 works perfectly
+on Delta; the subsequent flashing report came from an older build. This is
+player smoke feedback, not comprehensive full-game validation.
 
 ## Separate menu animation timing
 

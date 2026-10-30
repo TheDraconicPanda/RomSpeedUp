@@ -54,7 +54,7 @@ for callback,phase in itertools.product([0,info['field_callback'],0x02239731,0x0
     new.write(S,callback);cpu.mem_write(D,struct.pack('<3I',phase,phase,0))
     for name,destination,args in [('wait',0x020d0e6c,(1,1)),('sprite',0x02024eb4,(ARG,0x12345678))]:
         calls.clear();new.call(info[name],*args)
-        expected=int((name=='sprite' and info['version']=='v6.2') or callback!=info['field_callback'] or phase==1)
+        expected=int((name=='sprite' and info['version'] in ('v6.2','v6.3')) or callback!=info['field_callback'] or phase==1)
         assert len(calls)==expected,(callback,phase,name,calls)
         if expected:assert calls[0]==(destination,*args)
         assert cpu.reg_read(UC_ARM_REG_SP)==v.STACK
@@ -99,7 +99,7 @@ for size,seed in cases:
         assert bytes(machine.cpu.mem_read(address,len(data)))==expected
         assert machine.cpu.reg_read(UC_ARM_REG_SP)==v.STACK
 menu_cases=0
-if info['version']=='v6.2':
+if info['version'] in ('v6.2','v6.3'):
     assert before[0xf6318:0xf631c]==after[0xf6318:0xf631c]
     ov=ndspy.code.loadOverlayTable(target.arm9OverlayTable,lambda oid,fid:target.files[fid],{27})[27]
     cpu.mem_write(ov.ramAddress,bytes(ov.data))

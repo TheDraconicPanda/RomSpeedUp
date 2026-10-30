@@ -21,6 +21,7 @@ p.add_argument('--repel-steps',type=int,help='Private fixture: set a disposable 
 p.add_argument('--require-no-active-losses',action='store_true')
 p.add_argument('--min-battles',type=int,default=0)
 p.add_argument('--end-in-field',action='store_true')
+p.add_argument('--trace-text',action='store_true',help='Record glyph counts per real printer task invocation')
 a=p.parse_args()
 repel_steps=255 if a.repel else a.repel_steps
 if repel_steps is not None and not 0<=repel_steps<=255:p.error('Repel steps must fit one byte')
@@ -29,6 +30,7 @@ actions=json.loads(a.actions.read_text())
 if out.exists():p.error('Fresh output directory required')
 out.mkdir(parents=True)
 events=[];counts={};frame=0;draw_before={};losses=[];battles=[];repel=[]
+text_runs=[];current_text=None
 cwd=Path.cwd()
 with tempfile.TemporaryDirectory(dir='/workspace',prefix='sprite-handoff-') as tmp:
     tmp=Path(tmp);os.environ['XDG_CONFIG_HOME']=str(tmp/'.config')
@@ -39,8 +41,23 @@ with tempfile.TemporaryDirectory(dir='/workspace',prefix='sprite-handoff-') as t
     def flags(manager):return list(rd[manager+0x331:manager+0x333])
     def active_mask(manager):return sum((rd[manager+i*0xac]&1)<<i for i in range(4))
     def hook(at,n):
+        global current_text
         counts[hex(at)]=counts.get(hex(at),0)+1
-        if at==0x0205ce68 and repel_steps is not None and not repel:
+        if at==0x020202ec:
+            printer=e.memory.register_arm9.r1
+            current_text=dict(frame=frame,printer=hex(printer),window=rd[printer+4:printer+8:4][0],
+                callback=rd[printer+0x1c:printer+0x20:4][0],state=rd[printer+0x28],
+                speed=rd[printer+0x29],glyphs=0,copies=0,destroyed=False)
+            text_runs.append(current_text)
+        elif at==0x02002e7c:
+            if current_text is not None and hex(e.memory.register_arm9.r4)==current_text['printer']:current_text['glyphs']+=1
+        elif at==0x0201d578:
+            if current_text is not None and e.memory.register_arm9.r0==current_text['window']:current_text['copies']+=1
+        elif at==0x02020020:
+            if current_text is not None:current_text['destroyed']=True
+        elif at in (0x0202033a,0x02020344,0x02020350,0x02020352):
+            current_text=None
+        elif at==0x0205ce68 and repel_steps is not None and not repel:
             avatar=e.memory.register_arm9.r0
             obj=rd[avatar+0x30:avatar+0x34:4][0]
             manager=rd[obj+0xb4:obj+0xb8:4][0]
@@ -72,6 +89,9 @@ with tempfile.TemporaryDirectory(dir='/workspace',prefix='sprite-handoff-') as t
             events.append(dict(frame=frame,kind='upload',manager=hex(manager),flags=flags(manager)))
     for address in [0x02008120,0x02008130,0x02009418,0x02239730,0x02000e84,0x02004208,0x022378c0,0x0205ce68]:
         e.memory.register_exec(address,hook)
+    if a.trace_text:
+        for address in [0x020202ec,0x02002e7c,0x0201d578,0x02020020,0x0202033a,0x02020344,0x02020350,0x02020352]:
+            e.memory.register_exec(address,hook)
     try:
         for index,action in enumerate(actions):
             for tick in range(action['frames']):
@@ -94,6 +114,7 @@ with tempfile.TemporaryDirectory(dir='/workspace',prefix='sprite-handoff-') as t
 report=dict(frames=frame,counts=counts,pending_upload_losses=losses,
     active_sprite_upload_losses=[x for x in losses if x['active_mask']],
     events=events,battles=battles,repel_fixture=repel,final_callback=hex(final_callback))
+if a.trace_text:report['text_runs']=text_runs
 (out/'trace.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(dict(frames=frame,counts=counts,pending_upload_losses=len(losses))))
 if a.require_no_active_losses and report['active_sprite_upload_losses']:raise SystemExit('Active sprite upload was lost')
