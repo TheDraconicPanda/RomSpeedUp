@@ -5,7 +5,54 @@ current checkout, inputs and tools before acting on historical observations.
 
 ## Corrected V6 requirement — 2026-10-28 (current)
 
-### V6.2 field-menu correction — current experimental build (2026-10-29)
+### V6.3 instant dialogue — current experimental delivery (2026-10-30)
+
+Player corrected the continued flashing report: they were using an OLD build.
+They confirm the latest **V6.2 works perfectly on Delta**. Do not treat V6.2 as
+broken. Only new request: instant text outside battle; retain battle text.
+Branch `feature/v63-instant-field-text`; see `docs/v6-3-instant-dialogue.md`.
+
+Current V6.3: `build/v63-candidate-002/candidate.nds`, SHA256
+`5b4a5e458ff82e8a5af3e3dcffc72ee36e24a1313c297e1e12207761cb2a05e4`.
+Build with `scripts/build-v63.py` from the original Europe ROM. Only a printer
+BL and a 40-byte helper change from verified V6.2, plus compression metadata.
+All overlays/NitroFS/ARM7/sound assets are byte-identical to V6.2. No RAM growth.
+Callback-free asynchronous dialogue prints whole pages; custom callbacks keep
+stock behavior. All ordinary battle message entry points retain their callback
+0x0223CF15 and pacing. Input/page/scroll and explicit waits remain active.
+
+V6.2 first dialogue: 27 glyphs over frames 118–171; V6.3: all 27 in one task at
+118, full page visible by captured frame 120. It waits through frame 300 without
+input, and advances on A. The 24 initial battle-printer calls retain per-call
+state/speed/glyph/copy/destruction behavior (physical frame placement can vary).
+Complete trainer battle returns to field with zero active-sprite upload losses.
+UI/touch replay: 240 updates, 3600 draws, zero static-icon changes; party opens
+and returns normally. Native printer/scheduler/menu checks pass; 52 tests pass.
+Saving and separate fresh import/reload passed; the exported battery changed
+and restored the saved cave position. Original ROM/save hashes remain unchanged.
+Verified Drive delivery is recorded below. Fast Forward
+OFF; import battery save and boot fresh. Avoid older quick savestates.
+
+### V6.3 Drive delivery confirmed — 2026-10-30
+
+`Pokemon_SoulSilver_V6_3_ROM_ONLY_2X_EXPERIMENTAL.zip`, **60827138 bytes**,
+SHA256 `2d46012814a27ca1ce1975b5d26842345fc237b5a76332ba5127e502089010f6`.
+Drive upload returned success; separate metadata readback verifies exact name,
+size and authorized parent `1J7caSyzIpCCnbDhVRo7x4OX5CEijfpIV`.
+<https://drive.google.com/file/d/1VhaaGSGl6PQ0-eI2GNctUbsJa0SsnBYa/view?usp=drivesdk>
+Private ZIP: `build/v63-delivery/`, ready ROM/readme/checksum/report; no user save.
+V6.2 is preserved as the working fallback, not marked broken or overwritten.
+
+The first transfer was interrupted by the environment restart. A subsequent
+`/tmp/v63-native.zip` transfer returned MCP -32603 request timed out; folder
+readback found no V6.3. The plugin permission check confirmed writes allowed,
+so this was not a missing-permission report or a Google Drive API error.
+A fresh upload using the full `/workspace/RomSpeedUp/build/v63-delivery/` ZIP
+path succeeded. Underlying timeout cause remains unconfirmed. Do not claim
+server-side cancellation; only local calls can be stopped. CLI Git publishing
+was interrupted; connected GitHub tools are now available for the review branch.
+
+### V6.2 field-menu correction — player-confirmed working baseline (2026-10-29)
 
 Player reports lower-screen menu touch button flashes frantically in V6.1.
 Confirmed **rendering flicker**, not only sped-up animation: the field-only 2D

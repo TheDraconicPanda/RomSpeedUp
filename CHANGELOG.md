@@ -1,5 +1,15 @@
 # Changelog
 
+## V6.3 — experimental instant dialogue (2026-10-30)
+
+- Player confirms the latest V6.2 works on Delta; the continued flashing report
+  came from an older build. Retained that working graphics/movement/sound base.
+- Ordinary dialogue pages now fill in one printer update, preserving input,
+  page/scroll and explicit timed waits. Callback-driven battle messages retain
+  their pacing; all overlays and NitroFS assets remain identical to V6.2.
+- Added native printer/control/callback checks and live before/after dialogue
+  traces. See [implementation and validation](docs/v6-3-instant-dialogue.md).
+
 ## V6.2 — experimental lower-screen menu correction (2026-10-29)
 
 - Reproduced V6.1's alternating empty menu-sprite frames. Restored the original

@@ -172,6 +172,24 @@
     "pipeline_tests_passed": 51,
     "save_reload": "Changed battery save exported and imported on separate fresh boot; saved cave position restored",
     "drive_file_id": "1yhKTLWud3EcjYUES-65WZ7DgsBMmd4yJ",
-    "drive_verified_bytes": 60826897
+    "drive_verified_bytes": 60826897,
+    "Delta_feedback": "Player confirms latest V6.2 works perfectly; continued flashing report was an older build"
+  },
+  "v6.3": {
+    "status": "experimental",
+    "baseline": "verified V6.2 built from exact original Europe ROM",
+    "requires_delta_fast_forward": false,
+    "target_sha256": "5b4a5e458ff82e8a5af3e3dcffc72ee36e24a1313c297e1e12207761cb2a05e4",
+    "ordinary_dialogue": "instant pages, manual advancement and control waits preserved",
+    "battle_messages": "callback-driven printers unchanged; battle overlays byte-identical to V6.2",
+    "assets": "all NitroFS payloads and ARM7 byte-identical to V6.2",
+    "details": "docs/v6-3-instant-dialogue.md",
+    "Delta_validated": false,
+    "pipeline_tests_passed": 52,
+    "save_reload": "Changed disposable battery save exported and loaded on separate fresh boot; saved cave position restored",
+    "trainer_regression": "Full trainer battle completed with zero lost active-sprite uploads",
+    "native_printer_cases": 98,
+    "drive_file_id": "1VhaaGSGl6PQ0-eI2GNctUbsJa0SsnBYa",
+    "drive_verified_bytes": 60827138
   }
 }
