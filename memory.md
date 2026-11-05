@@ -5,7 +5,50 @@ current checkout, inputs and tools before acting on historical observations.
 
 ## Corrected V6 requirement — 2026-10-28 (current)
 
-### V6.3 instant dialogue — current experimental delivery (2026-10-30)
+### V6.4 cutscene correction — current experimental candidate
+
+Player reports freezing at the START of scripted scenes, most recently Vermilion
+Suicune after leaving the ship. Earlier pocket-submitted timing and V6.2 answers
+were explicitly withdrawn. Do not use them as evidence or recommend V6.2 as a
+guaranteed workaround: a local rival fixture also races on V6.2.
+
+Branch `fix/v63-scripted-scenes`; `docs/v6-4-cutscene-resources.md` documents the
+one-instruction overlay 1 fix. Ready initialization at 0x021F198C changes 1→0;
+VWait cleanup must wait until VBlank upload sets ready=1. Actual user-save trace
+reproduces cleanup before upload and assertion in the old build. V6.4 completes
+Suicune/Eusine dialogue, sets story flags, releases control and permits walking.
+Older-save normal-warp Victory Road rival fixture now reaches battle with correct
+sprites and zero active-sprite upload losses. Full rival battle not verified.
+57 native task orders pass (old baseline unsafe in 26), 98 text and 3663 other
+native regression cases pass; 53 pipeline tests pass. Instant dialogue, ARM9,
+ARM7, sound and all other overlays/files are unchanged from V6.3.
+
+Candidate `build/v64-candidate-001/candidate.nds`, SHA256
+`b12b08cb3529381dfc29299cb06ee78f15bdd495a8740fc38c342185a85ebecc`.
+Build from exact original Europe ROM with `scripts/build-v64.py`.
+Current user save SHA256
+`9debb8c2d6678db9e7a493d3acf4fd5dd8cb54bb27be077d0338b355c58cacc5`;
+512-KiB raw battery save despite .dsv extension. Input preserved unchanged.
+In-game save after Suicune and separate fresh import/reload preserve completed
+event flags and location. Private diagnostics under `artifacts/v64/`. Fast Forward OFF, fresh battery-save
+boot; never use old quickstates. Delta/full-game verification still pending.
+
+Local V6.3 base commit 3b08424 and API-published remote df1f2f32 have identical
+content tree 0d22c44184ba771d1163c7ae52e4c9fb79cf3080 but different identities.
+Publish the fix via a new API commit parented to the remote head, or reconcile
+before CLI push; never force-push the review branch. Draft V6.3 PR is #11.
+
+### V6.4 Drive delivery confirmed
+
+`Pokemon_SoulSilver_V6_4_ROM_ONLY_2X_EXPERIMENTAL.zip`, 60679586 bytes,
+SHA256 `56857e32733b962f48005111aadbf63378a11f7a8ac69adfabed671d6add60e5`.
+Upload success and separate metadata confirm exact name/size and authorized
+parent `1J7caSyzIpCCnbDhVRo7x4OX5CEijfpIV`.
+<https://drive.google.com/file/d/1sKDsOvTrw43Yjs1R7yfvEIsN-qCeTErL/view?usp=drivesdk>
+Private package `build/v64-delivery/` contains ready ROM/readme/checksum/report,
+no save data. V6.3 is superseded for the reproduced cutscene race.
+
+### V6.3 instant dialogue — historical delivery (2026-10-30)
 
 Player corrected the continued flashing report: they were using an OLD build.
 They confirm the latest **V6.2 works perfectly on Delta**. Do not treat V6.2 as

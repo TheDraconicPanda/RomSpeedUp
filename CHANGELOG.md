@@ -1,5 +1,15 @@
 # Changelog
 
+## V6.4 — experimental scripted-scene correction
+
+- Reproduced the Vermilion Suicune freeze from the supplied current save:
+  VWait cleanup can free texture data before its VBlank upload.
+- Initialize the cutscene resource as pending until upload completes. Retain
+  instant dialogue, gameplay/sound clocks and battle assets.
+- The full Suicune event and a rival scene/battle-entry fixture now proceed;
+  native callback ordering checks cover 57 schedules. See
+  [evidence and limits](docs/v6-4-cutscene-resources.md).
+
 ## V6.3 — experimental instant dialogue (2026-10-30)
 
 - Player confirms the latest V6.2 works on Delta; the continued flashing report
