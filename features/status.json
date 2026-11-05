@@ -173,10 +173,11 @@
     "save_reload": "Changed battery save exported and imported on separate fresh boot; saved cave position restored",
     "drive_file_id": "1yhKTLWud3EcjYUES-65WZ7DgsBMmd4yJ",
     "drive_verified_bytes": 60826897,
-    "Delta_feedback": "Player confirms latest V6.2 works perfectly; continued flashing report was an older build"
+    "Delta_feedback": "Player confirms latest V6.2 works perfectly; continued flashing report was an older build",
+    "known_issue": "Local Victory Road event fixture can hit the same texture cleanup/upload race; not a guaranteed workaround."
   },
   "v6.3": {
-    "status": "experimental",
+    "status": "superseded-scripted-scene-race",
     "baseline": "verified V6.2 built from exact original Europe ROM",
     "requires_delta_fast_forward": false,
     "target_sha256": "5b4a5e458ff82e8a5af3e3dcffc72ee36e24a1313c297e1e12207761cb2a05e4",
@@ -190,6 +191,28 @@
     "trainer_regression": "Full trainer battle completed with zero lost active-sprite uploads",
     "native_printer_cases": 98,
     "drive_file_id": "1VhaaGSGl6PQ0-eI2GNctUbsJa0SsnBYa",
-    "drive_verified_bytes": 60827138
+    "drive_verified_bytes": 60827138,
+    "player_feedback": "Scripted-scene freeze at event start; Suicune in Vermilion reproduced from the supplied current save. Prior pocket-submitted V6.2/timing answers were withdrawn."
+  },
+  "v6.4": {
+    "status": "experimental-cutscene-fix",
+    "baseline": "verified V6.3 built from exact original Europe ROM",
+    "requires_delta_fast_forward": false,
+    "target_sha256": "b12b08cb3529381dfc29299cb06ee78f15bdd495a8740fc38c342185a85ebecc",
+    "fix": "Overlay 1 texture ready flag initializes pending; VWait cleanup waits for actual VBlank upload",
+    "retained": "Instant ordinary dialogue, battle text, gameplay/audio clocks and all other assets",
+    "native_ordering_cases": 57,
+    "baseline_unsafe_orders": 26,
+    "target_unsafe_orders": 0,
+    "native_text_cases": 98,
+    "native_regression_cases": 3663,
+    "pipeline_tests_passed": 53,
+    "suicune": "Actual supplied battery save: scene completes, progression flags set, control restored, walking succeeds; no GF_AssertFail",
+    "rival": "Older-save normal-warp fixture reaches battle with correct sprites and zero lost active-sprite uploads; whole battle not checked",
+    "details": "docs/v6-4-cutscene-resources.md",
+    "Delta_validated": false,
+    "save_reload": "In-game save after Suicune exported, separately imported on fresh boot; Vermilion and completed event flags persist",
+    "drive_file_id": "1sKDsOvTrw43Yjs1R7yfvEIsN-qCeTErL",
+    "drive_verified_bytes": 60679586
   }
 }
